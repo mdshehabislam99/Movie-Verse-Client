@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+@plugin "daisyui";
+
+
+.font-bubble {
+  font-family: "Bubblegum Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+body{
+
+  background-image: url("./assets/bg.png");
+}
+.footer{
+
+  border-radius: 2000px 2000px 0px 0px;
+}
+.navs{
+  background: transparent;
+}
+.container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("./assets/dangerous-2021-8FC7Hn.jpg");
+  max-width: none;
+  padding-top: 40px;
+  
+}
+
+@media (min-width: 640px) {
+  .container {
+    background-position: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    background-position: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    background-position: right;
+  }
+}
