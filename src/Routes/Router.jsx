@@ -6,8 +6,10 @@ import Login from '../Pages/LogResAuth/Login';
 import ForgotPassword from '../Pages/ForgotPassword/ForgotPassword';
 import Mainlayout from '../MainLayout/Mainlayout';
 import Register from '../Pages/LogResAuth/Register';
-import AllMovies from '../Pages/AllMovies/AllMovies';
 import MyCollection from '../Pages/MyCollection/MyCollection';
+import AllMovies from '../Pages/AllMoviesPage/AllMovies';
+import AddMovies from '../Pages/AllMoviesPage/AddMovies';
+import MovieDetails from '../Pages/AllMoviesPage/MovieDetails';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch("http://localhost:3000/movie"),
       },
       {
         path: "/login",
@@ -37,8 +40,17 @@ const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/movie"),
       },
       {
-        path: "my-collection",
+        path: "/my-collection",
         element: <MyCollection></MyCollection>,
+      },
+      {
+        path: "/add-movie",
+        element: <AddMovies></AddMovies>,
+      },
+      {
+        path: "/movie-details",
+        element: <MovieDetails></MovieDetails>,
+        loader: () => fetch("http://localhost:3000/movie"),
       },
     ],
   },

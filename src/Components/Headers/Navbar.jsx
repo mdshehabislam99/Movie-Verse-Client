@@ -94,7 +94,7 @@ const Navbar = () => {
               className="bg-transparent border-none outline-none text-white placeholder-gray-400 w-full"
             />
           </div>
-          <div className="lg:hidden">
+          <div className="lg:hidden md:hidden">
             <button className="mt-2 hover:text-amber-500">
               <FaSearch />
             </button>
@@ -102,7 +102,9 @@ const Navbar = () => {
 
           <button
             placeholder="Search movies, shows..."
-            className="text-white hover:text-amber-300 transition-colors duration-200 p-2"
+            className="text-white 
+            hover:text-amber-300
+             transition-colors duration-200 "
             title="Search"
           >
             Search
@@ -136,14 +138,14 @@ const Navbar = () => {
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-amber-500 border-none rounded-lg text-white hover:bg-amber-600 btn px-6 py-2 transition-colors duration-200 font-medium "
+                className="bg-amber-500 border-none rounded-full text-white hover:bg-amber-600 btn px-6 py-2 transition-colors duration-200 font-medium "
               >
                 Logout
               </button>
             </div>
           ) : (
             <Link to="/login">
-              <button className="bg-amber-500 border-none rounded-lg text-white hover:bg-amber-600 btn px-6 py-2 transition-colors duration-200 font-medium ">
+              <button className="bg-amber-500 border-none rounded-full text-white hover:bg-amber-600 btn px-6 py-2 transition-colors duration-200 font-medium ">
                 Login
               </button>
             </Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RecentHistory = () => {
+const UpdateMovies = () => {
      return (
           <div>
                
@@ -8,4 +8,4 @@ const RecentHistory = () => {
      );
 };
 
-export default RecentHistory;
+export default UpdateMovies;
