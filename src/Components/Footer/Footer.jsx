@@ -6,138 +6,155 @@ import Logo from "../Logo/Logo";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-gradient-to-r from-pink-300 text-center to-green-400 footer px-4 py-6">
-        <div className="mx-auto px-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 lg:gap-10 md:gap-1">
-            {/* Nav links */}
-            <div className="lg:mt-7 md:mt-17 text-white">
-              <h3 className="text-lg font-semibold mb-2 ">Quick Links</h3>
-              <ul className="space-y-2 font-medium ">
-                <li>
-                  <Link
-                    to="/"
-                    className="hover:text-amber-500 hover:underline "
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/all-movie"
-                    className="hover:text-amber-500 hover:underline "
-                  >
-                    All Movies
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/my-collection"
-                    className="hover:text-amber-500 hover:underline "
-                  >
-                    My Collection
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="lg:col-span-2 md:-ml-8">
-              <Link
-                to="/"
-                className="md:mt-5 hover:text-white hover:underline text-2xl font-bold text-white mb-4 md:mb-2 inline-block"
-              >
+      <footer className=" text-white backdrop-blur-lg bg-gray-800/80 text-center to-green-400 footers py-4">
+        <div className="mx-auto ">
+          <div className="text-center mb-3">
+            <h1
+              className="hover:underline text-2xl font-bold  transition-all
+                  duration-500 transform hover:scale-105"
+            >
+              <Link to="/">
                 <Logo></Logo>
               </Link>
-              <p className="font-semibold mb-4 max-w-sm text-white text-lg">
-                Your ultimate movie management platform. Browse, organize, and
-                discover your favorite films with advanced filtering and
-                personal collections. Making movie nights magical while
-                connecting cinephiles worldwide.
-              </p>
+            </h1>
+          </div>
+          <div
+            className="grid grid-cols-1 md:grid-cols-2
+           lg:grid-cols-3 gap-3 md:gap-0 lg:gap-3 "
+          >
+            {/* Nav links */}
+            <div className="lg:mt-7 ">
+              <h3
+                className="text-lg 
+              text-gray-400 font-semibold mb-2 "
+              >
+                Quick Links
+              </h3>
+              <ul className="space-y-2 font-medium ">
+                <li>
+                  <button
+                    className="hover:text-amber-500 hover:underline  transition-all
+                  duration-500 transform hover:scale-105"
+                  >
+                    <Link to="/">Home</Link>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="hover:text-amber-500 hover:underline  transition-all
+                  duration-500 transform hover:scale-105"
+                  >
+                    <Link to="/all-movie">All Movies</Link>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="hover:text-amber-500 hover:underline  transition-all
+                  duration-500 transform hover:scale-105"
+                  >
+                    <Link to="/my-collection">My Collection</Link>
+                  </button>
+                </li>
+              </ul>
             </div>
 
             {/* Legal  */}
-            <div className="lg:mt-7  text-white">
-              <h3 className="text-lg font-semibold mb-4 ">Legal</h3>
-              <ul className="space-y-2">
+            <div className="lg:mt-7 my-3 md:mt-0">
+              <h3 className="text-lg text-gray-400 font-semibold mb-4 ">
+                Legal
+              </h3>
+              <ul className="space-y-2 font-medium">
                 <li>
-                  <Link
-                    to="/privacy-policy"
-                    className="hover:text-amber-500 hover:underline"
+                  <button
+                    className="hover:text-amber-500 hover:underline  transition-all
+                  duration-500 transform hover:scale-105"
                   >
-                    Privacy Policy
-                  </Link>
+                    <Link to="/privacy-policy">Privacy Policy</Link>
+                  </button>
                 </li>
                 <li>
-                  <Link
-                    to="/terms-services"
-                    className="hover:text-amber-500 hover:underline "
+                  <button
+                    className="hover:text-amber-500 hover:underline
+                    transition-all duration-500 hover:scale-105"
                   >
-                    Terms of Services
-                  </Link>
+                    <Link to="/terms-services">Terms of Services</Link>
+                  </button>
                 </li>
               </ul>
             </div>
-            <div className="flex text-white  lg:flex-col lg:space-y-3 sm:justify-center space-x-4">
+            <div
+              className="flex flex-col items-center md:col-span-2
+             lg:col-span-1 lg:mt-7"
+            >
               {/* Social Media Links*/}
-
-              <a
-                href="https://www.facebook.com/"
-                className="text-lg gap-2
+              <h3 className="text-lg text-gray-400 font-semibold mb-4">
+                Follow Us
+              </h3>
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                <a
+                  href="https://www.facebook.com/"
+                  className="text-sm gap-2
                  font-bold flex 
-                  lg:flex-row flex-col hover:text-amber-500 "
-              >
-                <span
-                  className="hover:text-amber-500 w-14 hover:bg-amber-500 lg:ml-0 ml-3
-                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                   flex-col hover:text-amber-500  transition-all
+                  duration-300 transform hover:scale-105"
                 >
-                  <SocialIcon url="https://www.facebook.com/"></SocialIcon>
-                </span>
-                <span className="lg:mt-2 mr-2"> Facebook</span>
-              </a>
+                  <span
+                    className="hover:text-amber-500 w-14 hover:bg-amber-500  ml-2
+                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                  >
+                    <SocialIcon url="https://www.facebook.com/"></SocialIcon>
+                  </span>
+                  <span className="lg:mt-2"> Facebook</span>
+                </a>
 
-              <a
-                href="https://x.com"
-                className=" text-lg gap-2
+                <a
+                  href="https://x.com"
+                  className=" text-sm gap-2
                  font-bold flex
-                  lg:flex-row flex-col hover:text-amber-500"
-              >
-                <span
-                  className="hover:text-amber-500 w-14 hover:bg-amber-500
-                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                   flex-col hover:text-amber-500  transition-all
+                  duration-300 transform hover:scale-105"
                 >
-                  <SocialIcon url="https://x.com"></SocialIcon>
-                </span>
-                <span className="lg:mt-2 mr-2">Twitter</span>
-              </a>
+                  <span
+                    className="hover:text-amber-500 w-14 hover:bg-amber-500
+                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                  >
+                    <SocialIcon url="https://x.com"></SocialIcon>
+                  </span>
+                  <span className="lg:mt-2">Twitter</span>
+                </a>
 
-              <a
-                href="https://github.com/shehabislam99"
-                className="text-lg gap-2
+                <a
+                  href="https://github.com/shehabislam99"
+                  className="text-sm gap-2
                  font-bold flex
-                  lg:flex-row flex-col hover:text-amber-500 "
-              >
-                <span
-                  className="hover:text-amber-500 w-14 hover:bg-amber-500
-                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                   flex-col hover:text-amber-500  transition-all
+                  duration-300 transform hover:scale-105"
                 >
-                  <SocialIcon url="https://github.com/shehabislam99"></SocialIcon>
-                </span>
-                <span className="lg:mt-2 mr-2"> GitHub</span>
-              </a>
+                  <span
+                    className="hover:text-amber-500 w-14 hover:bg-amber-500
+                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                  >
+                    <SocialIcon url="https://github.com/shehabislam99"></SocialIcon>
+                  </span>
+                  <span className="lg:mt-2"> GitHub</span>
+                </a>
 
-              <a
-                href="https://www.linkedin.com/"
-                className="text-lg gap-2
+                <a
+                  href="https://www.linkedin.com/"
+                  className="text-sm gap-2
                  font-bold flex
-                  lg:flex-row flex-col hover:text-amber-500"
-              >
-                <span
-                  className="hover:text-amber-500 w-14 hover:bg-amber-500 lg:ml-0 ml-1
-                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                   flex-col hover:text-amber-500 transition-all
+                  duration-300 transform hover:scale-105"
                 >
-                  <SocialIcon url="https://www.linkedin.com/"></SocialIcon>
-                </span>
-                <span className="lg:mt-2 "> LinkedIn </span>
-              </a>
+                  <span
+                    className="hover:text-amber-500 w-14 hover:bg-amber-500  
+                   h-14 bg-blue-800 rounded-full flex items-center justify-center"
+                  >
+                    <SocialIcon url="https://www.linkedin.com/"></SocialIcon>
+                  </span>
+                  <span className="lg:mt-2 "> LinkedIn </span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

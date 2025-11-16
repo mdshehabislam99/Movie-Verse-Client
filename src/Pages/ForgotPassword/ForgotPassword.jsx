@@ -61,7 +61,10 @@ const ForgotPassword = () => {
               >
                 Email Address
               </label>
-              <div className="relative">
+              <div
+                className="relative  transition-all
+                  duration-500 transform hover:scale-105"
+              >
                 <div
                   className="absolute inset-y-0  pl-3 
                 flex items-center "
@@ -78,8 +81,8 @@ const ForgotPassword = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-9 py-3 border 
-                  border-gray-300 text-gray-800 bg-gray-200 rounded-full 
-                  focus:outline-none focus:border-black focus:z-10 "
+                  border-gray-400 text-gray-800 bg-gray-200 rounded-full 
+                  focus:outline-none focus:border-green-400 focus:z-10 "
                   placeholder="Enter your email address"
                 />
               </div>
@@ -92,7 +95,8 @@ const ForgotPassword = () => {
                 className="group relative w-full flex justify-center
                  py-3 px-4 border border-transparent text-lg font-medium
                   rounded-full text-white bg-amber-500
-                  hover:bg-amber-700  duration-300 "
+                  hover:bg-amber-700   transition-all
+                  duration-300 transform hover:scale-105 "
               >
                 {isSubmitting ? (
                   <div className="flex items-center">
@@ -111,7 +115,10 @@ const ForgotPassword = () => {
             <div className="text-center">
               <Link
                 to="/login"
-                className="inline-flex items-center text-blue-600 hover:text-amber-500 font-medium transition-colors"
+                className="inline-flex items-center
+                 text-blue-600 hover:text-amber-500 
+                 font-medium  transition-all
+                  duration-500 transform hover:scale-105"
               >
                 <FaArrowLeft className="mr-2" />
                 Back to Login

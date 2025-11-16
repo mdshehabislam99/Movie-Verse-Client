@@ -34,7 +34,7 @@ const Navbar = () => {
 
 
   const navLinks = [
-    { to: "/", label: "Home" },
+    {to: "/", label: "Home" },
     { to: "/all-movie", label: "All Movies" },
     { to: "/my-collection", label: "My Collection" },
   ];
@@ -42,18 +42,21 @@ const Navbar = () => {
   const links = (
     <>
       {navLinks.map((link, index) => (
-        <li key={index}>
+        <button key={index}>
           <NavLink
             to={link.to}
             className={({ isActive }) =>
-              `text-[16px] font-medium hover:text-amber-300 transition-colors duration-200 ${
-                isActive ? "text-amber-400 font-medium underline" : "text-white"
-              }`
+              `text-[16px] font-medium hover:text-amber-300  transition-all
+                  duration-500 transform hover:scale-105  ${
+                    isActive
+                      ? "text-amber-400 font-medium underline"
+                      : "text-white"
+                  }`
             }
           >
             {link.label}
           </NavLink>
-        </li>
+        </button>
       ))}
     </>
   );
@@ -73,13 +76,19 @@ const Navbar = () => {
           <div className="flex items-center">
             <button
               onClick={toggleDropdown}
-              className="lg:hidden flex gap-2 items-center focus:outline-none mr-4"
+              className="lg:hidden flex gap-2 items-center  transition-all
+                  duration-300 transform hover:scale-105
+              focus:outline-none mr-4"
             >
               <HiOutlineMenuAlt1 className="w-7 h-7 text-white" />
+              <div className=" items-center hover:underline">
+                <Logo />
+              </div>
             </button>
-            <div className="flex items-center ">
+            <div className="hidden lg:flex  items-center">
               <Logo />
             </div>
+
             <div className="ml-15 hidden lg:flex">
               <ul className="flex justify-between gap-8">{links}</ul>
             </div>
@@ -87,7 +96,12 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center bg-gray-800 rounded-full px-4 py-2 w-64">
+          <div
+            className="hidden md:flex items-centerw-full
+             text-gray-800 bg-gray-800 border border-gray-400 rounded-full       
+             transition-all
+            duration-500 transform hover:scale-105 px-4 py-2 w-48"
+          >
             <input
               type="text"
               placeholder="Search movies, shows..."
@@ -104,7 +118,8 @@ const Navbar = () => {
             placeholder="Search movies, shows..."
             className="text-white 
             hover:text-amber-300
-             transition-colors duration-200 "
+             transition-all
+            duration-500 transform hover:scale-105 hidden md:flex  "
             title="Search"
           >
             Search
@@ -113,7 +128,8 @@ const Navbar = () => {
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
-            className="text-white hover:text-amber-300 transition-colors duration-200 p-2 rounded-full hover:bg-gray-800 hidden sm:block"
+            className="text-white hover:text-amber-300 transition-all
+                  duration-300 transform hover:scale-105  md:p-2 rounded-full hover:bg-blue-900"
             title={
               isDarkTheme ? "Switch to light theme" : "Switch to dark theme"
             }
@@ -133,22 +149,42 @@ const Navbar = () => {
                   src={user.photoURL || "https://via.placeholder.com/40"}
                   alt="user"
                   title={user.displayName || user.email}
-                  className="w-10 h-10 rounded-full border-2 border-amber-500"
+                  className="w-10 h-10 
+                  rounded-full border-2 border-amber-500"
                 />
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-amber-500 border-none rounded-full text-white hover:bg-amber-600 btn px-6 py-2 transition-colors duration-200 font-medium "
+                className="bg-amber-500 border-none 
+                rounded-full text-white hover:bg-amber-600 
+                btn px-6 py-2  transition-all
+                  duration-300 transform hover:scale-105
+                 font-medium "
               >
                 Logout
               </button>
             </div>
           ) : (
-            <Link to="/login">
-              <button className="bg-amber-500 border-none rounded-full text-white hover:bg-amber-600 btn px-6 py-2 transition-colors duration-200 font-medium ">
-                Login
+            <div className="flex gap-2">
+              <button
+                className="bg-amber-500 border-none
+               rounded-full text-white hover:bg-amber-600 
+               btn px-6 py-2 duration-300 
+               font-medium  transition-all
+                 transform hover:scale-105"
+              >
+                <Link to="/login">Log In</Link>
               </button>
-            </Link>
+              <button
+                className="bg-green-500 border-none
+               rounded-full text-white hover:bg-amber-600 
+               btn px-6 py-2 duration-300 
+               font-medium  transition-all
+                 transform hover:scale-105"
+              >
+                <Link to="/register">Sign Up</Link>
+              </button>
+            </div>
           )}
         </div>
       </nav>

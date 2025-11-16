@@ -12,7 +12,10 @@ const Banner = () => {
           With MovieVerse you can watch over 20,000 free movies and shows, plus
           Live TV on almost any device. What are you waiting for?
         </p>
-        <button className="bg-amber-500 hover:bg-amber-600 text-medium font-bold py-3 px-5 rounded-full text-sm md:text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-amber-500/25">
+        <button className="bg-amber-500 hover:bg-amber-600 
+        text-medium font-bold py-3 px-5 rounded-full
+         text-sm md:text-lg transition-all duration-300
+          transform hover:scale-105 shadow-2xl hover:shadow-amber-500/25">
           <Link to="/add-movie"> Explore Movies</Link>
         </button>
       </div>

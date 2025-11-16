@@ -63,9 +63,11 @@ const Login = () => {
 
   return (
     <div className="flex min-h-screen px-25">
-      <div className="mt-25 mb-10 py-10  bg-gradient-to-r 
+      <div
+        className="mt-25 mb-10 py-10  bg-gradient-to-r 
       from-pink-300 to-green-400 flex-1 rounded-lg flex
-       items-center justify-center  bg-white px-6 md:px-8">
+       items-center justify-center  bg-white px-6 md:px-8"
+      >
         <div className="max-w-md w-full">
           <div className="text-center">
             <Logo />
@@ -157,7 +159,9 @@ const Login = () => {
 
               <Link
                 to="/forgot-password"
-                className="text-sm text-red-600 hover:text-amber-500"
+                className="text-sm text-red-600
+                 hover:text-amber-500  transition-all
+                  duration-500 transform hover:scale-105"
               >
                 Forgot password?
               </Link>
@@ -167,7 +171,9 @@ const Login = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-amber-500 text-white py-3 rounded-full font-semibold hover:bg-amber-700 "
+              className="w-full bg-amber-500 text-white py-3 
+              rounded-full font-semibold hover:bg-amber-700  transition-all
+                  duration-300 transform hover:scale-105"
             >
               {submitting ? "Logging in..." : "Login"}
             </button>
@@ -185,7 +191,8 @@ const Login = () => {
               onClick={handleGoogle}
               className="w-full flex justify-center items-center 
               py-3 border border-gray-300 rounded-full
-               bg-gray-400 hover:bg-amber-500 transition-all text-sm font-medium text-gray-700"
+               bg-gray-400 hover:bg-amber-500  transition-all
+                  duration-300 transform hover:scale-105 text-sm font-medium text-gray-700"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path
@@ -211,12 +218,15 @@ const Login = () => {
             {/* Register link */}
             <p className="text-center text-sm text-gray-600 mt-4">
               Don’t have an account?{" "}
-              <Link
-                to="/register"
-                className="text-blue-600 hover:text-amber-500 font-semibold"
+              <button
+                className="text-blue-600 
+                hover:text-amber-500 font-semibold  transition-all
+                  duration-500 transform hover:scale-105"
               >
-                Create account
-              </Link>
+                <Link to="/register" >
+                  Create account
+                </Link>
+              </button>
             </p>
           </form>
         </div>

@@ -37,7 +37,11 @@ const AboutPlatform = () => {
 
   const FeatureCard = ({ feature, delay }) => (
     <div
-      className="group bg-gray-800/50 backdrop-blur-lg rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 hover:bg-gray-800/80 transition-all duration-500 hover:scale-105 animate-fade-in-up"
+      className="group bg-gray-800/50 backdrop-blur-lg 
+      rounded-2xl p-8 border border-gray-700
+       hover:border-blue-500/50 hover:bg-gray-800/80 
+       transition-all duration-500 hover:scale-105
+        animate-fade-in-up"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="text-4xl mb-6 transform group-hover:scale-110 transition-transform duration-300 animate-bounce">
@@ -84,9 +88,11 @@ const AboutPlatform = () => {
         </div>
 
          {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div className="grid grid-cols-1
+         md:grid-cols-2 gap-8 mb-16">
           {features.map((feature, index) => (
-            <FeatureCard key={index} feature={feature} delay={index * 150} />
+            <FeatureCard key={index} feature={feature}
+            delay={index * 150} />
           ))}
         </div> 
 
@@ -114,13 +120,16 @@ const AboutPlatform = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/register"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                className="bg-white text-blue-600 hover:bg-gray-100
+                 px-8 py-4 rounded-lg font-semibold text-lg transition-all
+                  duration-300 transform hover:scale-105"
               >
                 Get Started Free
               </Link>
               <Link
                 to="/all-movie"
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
+                className="border-2 border-white text-white hover:bg-white
+                hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
               >
                 Browse Movies
               </Link>

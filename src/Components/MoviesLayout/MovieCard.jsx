@@ -14,10 +14,10 @@ const MovieCard = ({ movie }) => {
 
   return (
     <div
-      className="group relative bg-gradient-to-br 
-    from-pink-300 text-center to-green-400 rounded-2xl 
-    overflow-hidden shadow-2xl hover:shadow-green-500
-     transition-all duration-500 hover:scale-105 transform flex flex-col h-full"
+      className="text-center relative group  backdrop-blur-lg
+       rounded-2xl bg-gray-800/80  hover:bg-gray-800/30
+    overflow-hidden shadow-xl hover:shadow-gray-500/20
+     transition-all duration-500 hover:scale-105"
     >
       <div className="relative overflow-hidden flex-shrink-0">
         <img
@@ -42,7 +42,7 @@ const MovieCard = ({ movie }) => {
 
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <button className="bg-amber-500 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-           <Link to="/movie-details"> View Details</Link>
+            <Link to="/movie-details"> View Details</Link>
           </button>
         </div>
 

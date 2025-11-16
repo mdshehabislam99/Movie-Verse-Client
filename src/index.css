@@ -12,9 +12,10 @@ body{
 
   background-image: url("./assets/bg.png");
 }
-.footer{
+.footers{
 
   border-radius: 2000px 2000px 0px 0px;
+ 
 }
 .navs{
   background: transparent;
