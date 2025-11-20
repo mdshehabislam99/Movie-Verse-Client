@@ -1,22 +1,53 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useLoaderData, useParams } from 'react-router';
 import MovieCard from '../../Components/MoviesLayout/MovieCard';
+import axios from 'axios';
 
 const AllMovies = () => {
 
-const data = useLoaderData()
-console.log(data)
+  const { moviesId } = useParams();
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/get-all-movies")
+      .then((res) => {
+        setMovies(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
+  }, [moviesId]);
+  
+  if (loading) return;
+  <p className="text-center py-10">Loading...</p>;
+
+    if (movies.length === 0) {
+      return (
+        <div className="relative h-screen flex items-center justify-center">
+          <p className="text-amber-500 text-4xl text-center font-semibold">
+            No movies found 
+          </p>
+        </div>
+      );
+    }
 
      return (
-       <div className="mb-2">
-         <div className="py-20 text-center ">
-           <h1 className=" text-5xl font-bold mb-2"> All Movies</h1>
-           <p className="mb-7 text-3xl"> Explore All Movies</p>
-           <div className="grid px-10 lg:px-6 md:px-7 grid-cols-1 mt-10  md:grid-cols-2 lg:grid-cols-4 gap-10 mad:gap-5 lg:gap-4 items-stretch">
-             {data.map((movie) => (
-               <MovieCard key={movie._id} movie={movie}></MovieCard>
-             ))}
-           </div>
+       <div className="py-20 text-center">
+         <h1 className="text-4xl font-bubble font-bold mb-2">
+           All
+           <span className="ml-3 text-green-500">Movie</span>'S
+         </h1>
+         <p className="text-lg font-medium mb-5"> Explore All Movies</p>
+         <div
+           className="grid mt-10 ml-18 md:ml-20 lg:ml-25 grid-cols-1 md:grid-cols-2
+        lg:grid-cols-3 gap-8  "
+         >
+           {movies.map((movie) => (
+             <MovieCard key={movie._id} movie={movie}></MovieCard>
+           ))}
          </div>
        </div>
      );

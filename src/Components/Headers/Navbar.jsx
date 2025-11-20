@@ -12,6 +12,7 @@ import {
 } from "react-icons/hi";
 import MenuSideBar from "./MenuSideBar";
 
+
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -27,11 +28,12 @@ const Navbar = () => {
       });
   };
 
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-    document.documentElement.classList.toggle("dark");
-  };
-
+const handletoggleTheme = () => {
+  setIsDarkTheme(!isDarkTheme);
+  document
+    .querySelector("html")
+    .setAttribute("data-theme", isDarkTheme? "dark" : "light");
+};
 
   const navLinks = [
     {to: "/", label: "Home" },
@@ -50,7 +52,7 @@ const Navbar = () => {
                   duration-500 transform hover:scale-105  ${
                     isActive
                       ? "text-amber-400 font-medium underline"
-                      : "text-white"
+                      : ""
                   }`
             }
           >
@@ -80,7 +82,7 @@ const Navbar = () => {
                   duration-300 transform hover:scale-105
               focus:outline-none mr-4"
             >
-              <HiOutlineMenuAlt1 className="w-7 h-7 text-white" />
+              <HiOutlineMenuAlt1 className="w-7 h-7" />
               <div className=" items-center hover:underline">
                 <Logo />
               </div>
@@ -116,10 +118,10 @@ const Navbar = () => {
 
           <button
             placeholder="Search movies, shows..."
-            className="text-white 
+            className=" 
             hover:text-amber-300
              transition-all
-            duration-500 transform hover:scale-105 hidden md:flex  "
+            duration-500 transform font-semibold hover:scale-105 hidden md:flex  "
             title="Search"
           >
             Search
@@ -127,8 +129,8 @@ const Navbar = () => {
 
           {/* Theme Toggle Button */}
           <button
-            onClick={toggleTheme}
-            className="text-white hover:text-amber-300 transition-all
+            onClick={handletoggleTheme}
+            className="hover:text-amber-300 transition-all
                   duration-300 transform hover:scale-105  md:p-2 rounded-full hover:bg-blue-900"
             title={
               isDarkTheme ? "Switch to light theme" : "Switch to dark theme"
@@ -166,24 +168,27 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="flex gap-2">
-              <button
+              <Link
                 className="bg-amber-500 border-none
                rounded-full text-white hover:bg-amber-600 
                btn px-6 py-2 duration-300 
                font-medium  transition-all
                  transform hover:scale-105"
+                to="/login"
               >
-                <Link to="/login">Log In</Link>
-              </button>
-              <button
+                <button>Log In</button>
+              </Link>
+
+              <Link
                 className="bg-green-500 border-none
                rounded-full text-white hover:bg-amber-600 
                btn px-6 py-2 duration-300 
                font-medium  transition-all
                  transform hover:scale-105"
+                to="/register"
               >
-                <Link to="/register">Sign Up</Link>
-              </button>
+                <button>Sign Up </button>
+              </Link>
             </div>
           )}
         </div>

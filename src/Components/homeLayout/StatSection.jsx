@@ -1,109 +1,85 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
-import { getStatistics } from "../../api/movieApi";
-
+import { FcRating } from "react-icons/fc";
+import { IoFilmSharp } from "react-icons/io5";
+import { PiFilmSlateBold } from "react-icons/pi";
 
 const StatSection = () => {
   const [stats, setStats] = useState({
     totalMovies: 0,
-    totalUsers: 0,
+    averageRating: 0,
     totalGenres: 0,
-    totalReviews: 0,
   });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchStatistics = async () => {
-      try {
-        const statistics = await getStatistics();
-        setStats(statistics);
-      } catch (error) {
-        console.error("Error fetching statistics:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchStatistics();
-  }, []);
+useEffect(() => {
+  const fetchStats = async () => {
+    setLoading(true);
+    axios.get("http://localhost:3000/stats")
+   .then((res) => {
+       setStats(res.data);
+       setLoading(false);
+     })
+     .catch((error) => {
+       setLoading(false);
+       console.error("Error fetching movies:", error);
+     });
+    }
+  fetchStats();
+}, []);
 
-  const StatCard = ({ icon, number, label, suffix = "", delay }) => (
-    <div
-      className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 text-center border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105 animate-fade-in-up"
-      style={{ animationDelay: `${delay}ms` }}
-    >
-      <div
-        className="text-4xl mb-4 animate-bounce"
-        style={{ animationDelay: `${delay + 200}ms` }}
-      >
-        {icon}
-      </div>
-      <div className="text-4xl font-bold text-white mb-2">
-        {loading ? (
-          <div className="animate-pulse bg-gray-400 h-8 w-20 mx-auto rounded"></div>
-        ) : (
-          <>
-            {number.toLocaleString()}
-            {suffix}
-          </>
-        )}
-      </div>
-      <div className="text-gray-300 text-lg">{label}</div>
-    </div>
-  );
+ 
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900/30">
-      <div className="container mx-auto px-4">
+    <section className="my-20">
+      <div className="mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in">
-            MovieMaster Pro Statistics
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Statistics About{" "}
+            <span className="text-green-500 ml-1 hover:scale-110 transition-transform duration-200 font-bubble">
+              Movie
+            </span>
+            <span className="ml-3 text-blue-500  hover:scale-110 transition-transform duration-200 font-bubble">
+              VerSe
+            </span>{" "}
           </h2>
-          <p
-            className="text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in"
-            style={{ animationDelay: "0.2s" }}
-          >
-            Join thousands of movie enthusiasts who trust MovieMaster Pro to
-            organize and discover their favorite films
+          <p className="text-xl font-medium max-w-2xl mx-auto">
+            Discover the amazing collection of movies in our database
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          <StatCard
-            icon="🎬"
-            number={stats.totalMovies}
-            label="Total Movies"
-            delay={0}
-          />
-          <StatCard
-            icon="👥"
-            number={stats.totalUsers}
-            label="Registered Users"
-            delay={100}
-          />
-          <StatCard
-            icon="📊"
-            number={stats.totalGenres}
-            label="Movie Genres"
-            delay={200}
-          />
-          <StatCard
-            icon="⭐"
-            number={4.8}
-            label="Average Rating"
-            suffix="/5"
-            delay={300}
-          />
-        </div>
-
-        {/* Additional Info */}
         <div
-          className="mt-16 text-center animate-fade-in"
-          style={{ animationDelay: "0.5s" }}
+          className="grid grid-cols-1 md:grid-cols-3
+         lg:grid-cols-3 gap-8 max-w-md md:max-w-6xl mx-auto"
         >
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-lg rounded-full px-6 py-3 border border-white/20">
-            <span className="text-green-400 animate-pulse">✓</span>
-            <span className="text-white">
-              Trusted by movie lovers worldwide
-            </span>
+          <div className="bg-green-500  rounded-2xl p-8 text-center">
+            <div className="flex justify-center text-yellow-800 items-center text-4xl mb-4">
+              <PiFilmSlateBold />
+            </div>
+            <div className="text-4xl text-blue-800 font-bold  mb-2">
+              {stats.totalMovies.toLocaleString()}
+            </div>
+            <div className="font-medium text-lg">Total Movies</div>
+          </div>
+
+          <div className="bg-green-500 rounded-2xl p-8 text-center ">
+            <div className="flex justify-center items-center text-4xl mb-4">
+              <FcRating />
+            </div>
+            <div className="text-4xl text-blue-800 font-bold  mb-2">
+              {stats.averageRating}
+            </div>
+            <div className="font-medium text-lg">Average Rating</div>
+          </div>
+
+          <div className="bg-green-500 rounded-2xl p-8 text-center">
+            <div className="flex justify-center text-pink-800 items-center text-4xl mb-4">
+              <IoFilmSharp />
+            </div>
+            <div className="text-4xl text-blue-800 font-bold  mb-2">
+              {stats.totalGenres.toLocaleString()}
+            </div>
+            <div className="text-lg font-medium">Movie Genres</div>
           </div>
         </div>
       </div>

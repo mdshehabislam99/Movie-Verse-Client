@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 import { CgAsterisk } from "react-icons/cg";
 
 const AddMovies = () => {
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     title: "",
     genre: "",
@@ -18,20 +19,47 @@ const AddMovies = () => {
     posterUrl: "",
     language: "English",
     country: "",
+    addedBy: "",
+    created_at: "",
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your submit logic here
-    console.log("Form submitted:", formData);
+    console.log("Submitting with user:", user);
+ 
+    const movieData = {
+      ...formData,
+      addedBy: user.email || "unknown",
+      created_at: new Date().toISOString(),
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/movie", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify(movieData), 
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Movie added successfully:", data);
+      navigate("/all-movie");
+    } catch (error) {
+      console.error("Failed to add movie:", error);
+      alert("Failed to add movie. Please try again.");
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const genres = [
@@ -39,11 +67,11 @@ const AddMovies = () => {
     "Drama",
     "Comedy",
     "Sci-Fi",
-    "Horror",
+    "Animation",
     "Romance",
     "Thriller",
     "Fantasy",
-    "Mystery",
+    "Crime",
     "Adventure",
   ];
 
@@ -94,7 +122,7 @@ const AddMovies = () => {
               </div>
 
               {/* Genre */}
-              <div >
+              <div>
                 <label
                   htmlFor="genre"
                   className="flex text-lg ml-3 font-medium mb-1"
@@ -114,20 +142,18 @@ const AddMovies = () => {
                     focus:outline-none focus:ring-2 focus:ring-green-500
                       transition-all duration-300"
                 >
-                  
-                    <option value="" className="text-gray-700 bg-amber-200">
-                      Select Genre
+                  <option value="" className="text-gray-700 bg-amber-200">
+                    Select Genre
+                  </option>
+                  {genres.map((genre) => (
+                    <option
+                      key={genre}
+                      value={genre}
+                      className="text-white bg-blue-900"
+                    >
+                      {genre}
                     </option>
-                    {genres.map((genre) => (
-                      <option
-                        key={genre}
-                        value={genre}
-                        className="text-white bg-blue-900"
-                      >
-                        {genre}
-                      </option>
-                    ))}
-                  
+                  ))}
                 </select>
               </div>
 

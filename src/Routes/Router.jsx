@@ -10,6 +10,8 @@ import MyCollection from '../Pages/MyCollection/MyCollection';
 import AllMovies from '../Pages/AllMoviesPage/AllMovies';
 import AddMovies from '../Pages/AllMoviesPage/AddMovies';
 import MovieDetails from '../Pages/AllMoviesPage/MovieDetails';
+import MoviesByGenre from '../Pages/AllMoviesPage/MoviesByGenre';
+import UpdateMovies from '../Pages/AllMoviesPage/UpdateMovies';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("http://localhost:3000/movie"),
       },
       {
         path: "/login",
@@ -37,8 +38,8 @@ const router = createBrowserRouter([
       {
         path: "/all-movie",
         element: <AllMovies></AllMovies>,
-        loader: () => fetch("http://localhost:3000/movie"),
       },
+      { path: "/genre/:genreName", element: <MoviesByGenre></MoviesByGenre> },
       {
         path: "/my-collection",
         element: <MyCollection></MyCollection>,
@@ -48,9 +49,12 @@ const router = createBrowserRouter([
         element: <AddMovies></AddMovies>,
       },
       {
-        path: "/movie-details",
+        path: "/update-movie",
+        element: <UpdateMovies></UpdateMovies>,
+      },
+      {
+        path: "/single-movie-details/:moviesId",
         element: <MovieDetails></MovieDetails>,
-        loader: () => fetch("http://localhost:3000/movie"),
       },
     ],
   },

@@ -3,26 +3,18 @@ import { FcRating } from "react-icons/fc";
 import { FaPlay } from "react-icons/fa6";
 import { Link } from "react-router";
 const MovieCard = ({ movie }) => {
-  const {
-    title,
-    genre,
-    releaseYear,
-    rating,
-    duration,
-    posterUrl,
-  } = movie;
-
+ 
   return (
     <div
       className="text-center relative group  backdrop-blur-lg
        rounded-2xl bg-gray-800/80  hover:bg-gray-800/30
     overflow-hidden shadow-xl hover:shadow-gray-500/20
-     transition-all duration-500 hover:scale-105"
+     transition-all duration-500 hover:scale-105 w-80 h-[420px] flex flex-col"
     >
       <div className="relative overflow-hidden flex-shrink-0">
         <img
-          src={posterUrl}
-          alt={title}
+          src={movie?.posterUrl}
+          alt={movie?.title}
           className="w-full h-80 object-cover 
           transform group-hover:scale-110 transition-transform duration-700"
         />
@@ -30,24 +22,27 @@ const MovieCard = ({ movie }) => {
         <div
           className="flex gap-1 absolute bg-purple-600/20 
          border border-purple-500/30 top-4 right-4 font-bold px-3 py-1 
-         rounded-full text-sm shadow-lg"
+         rounded-full text-white text-sm shadow-lg"
         >
           <FcRating className="w-5 h-5" />
-          {rating}
+          {movie?.rating}
         </div>
 
-        <div className="absolute top-4 left-4 bg-purple-600/20  border border-purple-500/30 px-3 py-1 rounded-full text-sm backdrop-blur-sm">
-          {releaseYear}
+        <div className="absolute top-4 left-4 bg-purple-600/20 text-white border border-purple-500/30 px-3 py-1 rounded-full text-sm backdrop-blur-sm">
+          {movie?.releaseYear}
         </div>
 
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <button className="bg-amber-500 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-            <Link to="/movie-details"> View Details</Link>
+            <Link to={`/single-movie-details/${movie?._id}`}>
+              {" "}
+              View Details
+            </Link>
           </button>
         </div>
 
-        <div className="absolute bottom-4 left-4 flex flex-wrap gap-2 mb-3">
-          {genre.split(", ").map((g, index) => (
+        <div className="absolute bottom-4 left-4 text-white flex flex-wrap gap-2 mb-3">
+          {movie?.genre.split(", ").map((g, index) => (
             <span
               key={index}
               className="bg-purple-600/20  px-2 py-1 rounded-full text-xs border border-purple-500/30"
@@ -56,18 +51,20 @@ const MovieCard = ({ movie }) => {
             </span>
           ))}
         </div>
-        <div className="absolute bg-purple-600/20  border border-purple-500/30 rounded-full px-2 py-1 bottom-4 right-4 flex gap-1 mb-3 ">
+        <div className="absolute bg-purple-600/20 text-white border border-purple-500/30 rounded-full px-2 py-1 bottom-4 right-4 flex gap-1 mb-3 ">
           <span className="mt-1 text-purple-400 ">
             <FaPlay className="h-4 w-4" />
           </span>
           <span className="gap-1">
-            {duration} <span>min</span>
+            {movie?.duration} <span>min</span>
           </span>
         </div>
       </div>
 
       <div className="mt-2 flex flex-col flex-grow">
-        <h3 className="text-2xl font-bold text-white line-clamp-2">{title}</h3>
+        <h3 className="text-2xl font-bold text-white line-clamp-2">
+          {movie?.title}
+        </h3>
       </div>
       <div className="flex mt-auto justify-between gap-4 p-2">
         <span></span>
@@ -77,7 +74,7 @@ const MovieCard = ({ movie }) => {
             hover:scale-105 flex items-center justify-center space-x-2 
             shadow-lg hover:shadow-amber-500/25"
         >
-          Add to Collection
+          <Link to="/my-collection">Add to Collection</Link>
         </button>
       </div>
     </div>

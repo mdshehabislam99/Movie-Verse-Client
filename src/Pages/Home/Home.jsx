@@ -1,29 +1,29 @@
 import React from "react";
-import Banner from "../../Components/homeLayout/Banner";
+import BannerTopRatedMovies from "../../Components/homeLayout/BannerTopRatedMovies";
 import AboutPlatform from "../../Components/homeLayout/AboutPlatform";
-import { useLoaderData } from "react-router";
-import HighRatedMovies from "../../Components/homeLayout/HighRatedMovie";
-import Slider from "../../Components/homeLayout/Slider";
+import FeatureHero from "../../Components/homeLayout/FeatureHero.jsx";
+import RecentlyAddMovie from "../../Components/homeLayout/RecentAddMovie.jsx";
+import GenreSection from "../../Components/homeLayout/GenreSection.jsx";
+import StatSection from "../../Components/homeLayout/StatSection.jsx";
 
 function Home() {
-  const data = useLoaderData();
+   
   return (
     <>
-      <div className="bg-transparent container">
-        <Banner></Banner>
+      <div>
+        <div>
+          <BannerTopRatedMovies></BannerTopRatedMovies>
+        </div>
+        <div className="mt-20">
+          <FeatureHero />
+        </div>
+        <div className="mt-10">
+          <RecentlyAddMovie></RecentlyAddMovie>
+        </div>
+        <GenreSection></GenreSection>
+        <AboutPlatform></AboutPlatform>
+        <StatSection></StatSection>
       </div>
-      <div className="mt-10">
-        <Slider movies={data} />
-      </div>
-      <div
-        className="grid px-10 lg:px-6 md:px-7 grid-cols-1 mt-10 
-       md:grid-cols-2 lg:grid-cols-4 gap-10 mad:gap-5 lg:gap-4 items-stretch"
-      >
-        {data.map((movie) => (
-          <HighRatedMovies key={movie._id} movie={movie}></HighRatedMovies>
-        ))}
-      </div>
-      <AboutPlatform></AboutPlatform>
     </>
   );
 }

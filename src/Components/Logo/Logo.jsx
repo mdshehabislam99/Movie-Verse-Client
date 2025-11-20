@@ -2,7 +2,7 @@ import React from "react";
 
 const Logo = () => {
   return (
-    <a className="text-3xl font-bold hover:no-underline">
+    <div className="text-3xl font-bold hover:no-underline">
       <span className="text-green-500  hover:scale-110 transition-transform duration-200 font-bubble">
         Movie
       </span>
@@ -10,7 +10,7 @@ const Logo = () => {
         VerSe
       </span>
       
-    </a>
+    </div>
   );
 };
 
