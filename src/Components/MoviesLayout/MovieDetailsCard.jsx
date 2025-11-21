@@ -4,25 +4,30 @@ import {  FaClock, FaGlobe, FaMapMarkerAlt } from "react-icons/fa";
 import { GiFilmProjector } from "react-icons/gi";
 import { IoFilmSharp } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import axios from "axios";
 
 const MovieDetailsCard = ({ movie }) => {
-  const[data,setData] =useState([])
+   const navigate = useNavigate();
 
-const handleDelelte = (id)=>{
+const handleDelelte = (id) => {
+  if (!window.confirm("Are you sure you want to delete this movie?")) {
+    return; 
+  }
+
   axios
     .delete(`http://localhost:3000/delete-movie?id=${id}`)
     .then((res) => {
-      console.log(res.data);
-      const filteredData = data.filter((d) => d._id != id);
-      setData(filteredData);
+      console.log("Deleted:", res.data);
+      alert("Oops..Movie deleted");
+      navigate("/all-movie"); 
     })
     .catch((error) => {
-      console.log(error);
+      console.log("Delete error:", error);
+      alert("Failed to delete. Check server!");
     });
-}
+};
 
 
   if (!movie) {
@@ -210,7 +215,7 @@ const handleDelelte = (id)=>{
                   <button>Edit Movie</button>
                 </Link>
                 <button
-                  onClick={() => handleDelelte(movie._id)}
+                  onClick={() => handleDelelte(movie?._id)}
                   className="flex-1 bg-red-600 
                  hover:bg-red-700   py-4 text-white
                 rounded-full  transition-all duration-300 transform 

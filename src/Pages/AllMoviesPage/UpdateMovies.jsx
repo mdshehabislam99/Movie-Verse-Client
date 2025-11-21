@@ -49,20 +49,17 @@ const UpdateMovies = () => {
     };
     console.log(movieData)
 
-   axios.put(
-      `http://localhost:3000/update-movie/${id}`,
-
-      movieData
-    )
-    .then(res=>{
-      console.log(res)
-    })
-    .catch(error=>{
-      console.log(error)
-    })
-  // console.log("Test update successful:", response.data);
-  // alert("Movie updated successfully!");
-  // navigate("/all-movie");
+    axios
+      .put(`http://localhost:3000/update-movie/${id}`, movieData)
+      .then((res) => {
+        console.log("Update success:", res.data);
+        alert("Movie updated successfully!");
+        navigate(`/single-movie-details/${id}`);
+      })
+      .catch((err) => {
+        console.log("Update error:", err);
+        alert("Update failed. Check backend logs!");
+      });
   };
 
   const handleChange = (e) => {

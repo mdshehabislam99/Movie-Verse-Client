@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 import { CgAsterisk } from "react-icons/cg";
@@ -35,12 +35,10 @@ const AddMovies = () => {
     };
 
    
-    const response = await axios.post(
+     axios.post(
       "http://localhost:3000/add-movie",
       movieData
     );
-
-    console.log("Movie added successfully:", response.data);
     navigate("/all-movie");
   };
 
