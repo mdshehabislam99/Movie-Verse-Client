@@ -57,7 +57,7 @@ useEffect(() => {
               <PiFilmSlateBold />
             </div>
             <div className="text-4xl text-blue-800 font-bold  mb-2">
-              {stats.totalMovies.toLocaleString()}
+              {stats?.totalMovies.toLocaleString()}
             </div>
             <div className="font-medium text-lg">Total Movies</div>
           </div>
@@ -67,7 +67,7 @@ useEffect(() => {
               <FcRating />
             </div>
             <div className="text-4xl text-blue-800 font-bold  mb-2">
-              {stats.averageRating}
+              {stats?.averageRating}
             </div>
             <div className="font-medium text-lg">Average Rating</div>
           </div>
@@ -77,7 +77,7 @@ useEffect(() => {
               <IoFilmSharp />
             </div>
             <div className="text-4xl text-blue-800 font-bold  mb-2">
-              {stats.totalGenres.toLocaleString()}
+              {stats?.totalGenres.toLocaleString()}
             </div>
             <div className="text-lg font-medium">Movie Genres</div>
           </div>

@@ -71,9 +71,9 @@ const GenreSection = () => {
       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
 
       <div className="relative z-10">
-        <h3 className="text-xl font-bold mb-2">{genre.name}</h3>
+        <h3 className="text-xl font-bold mb-2">{genre?.name}</h3>
         <p className="text-white/80">
-          {genre.count} {genre.count === 1 ? "movie" : "movies"}
+          {genre?.count} {genre?.count === 1 ? "movie" : "movies"}
         </p>
       </div>
 
@@ -86,17 +86,17 @@ const GenreSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="font-bubble text-5xl font-bold mb-3">
-            <span className="text-green-500">Movie</span>'s by Genre
+            <span className="text-green-500">Movie</span>'S By Genre
           </h2>
           <p className="text-xl max-w-2xl mx-auto">
-            Explore {movies.length} movies across {genres.length} genres
+            Explore {movies?.length} movies across {genres?.length} genres
           </p>
         </div>
 
         {genres.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {genres.map((genre, index) => (
-              <GenreCard key={genre.name} genre={genre} />
+              <GenreCard key={genre?.name} genre={genre} />
             ))}
           </div>
         ) : (

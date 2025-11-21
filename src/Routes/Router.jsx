@@ -12,6 +12,7 @@ import AddMovies from '../Pages/AllMoviesPage/AddMovies';
 import MovieDetails from '../Pages/AllMoviesPage/MovieDetails';
 import MoviesByGenre from '../Pages/AllMoviesPage/MoviesByGenre';
 import UpdateMovies from '../Pages/AllMoviesPage/UpdateMovies';
+import PrivetRoute from '../Components/PrivetRout/PrivetRoute';
 
 const router = createBrowserRouter([
   {
@@ -42,15 +43,27 @@ const router = createBrowserRouter([
       { path: "/genre/:genreName", element: <MoviesByGenre></MoviesByGenre> },
       {
         path: "/my-collection",
-        element: <MyCollection></MyCollection>,
+        element: (
+          <PrivetRoute>
+            <MyCollection></MyCollection>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/add-movie",
-        element: <AddMovies></AddMovies>,
+        element: (
+          <PrivetRoute>
+            <AddMovies></AddMovies>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/update-movie/:id",
-        element: <UpdateMovies></UpdateMovies>,
+        element: (
+          <PrivetRoute>
+            <UpdateMovies></UpdateMovies>
+          </PrivetRoute>
+        ),
       },
       {
         path: "/single-movie-details/:moviesId",

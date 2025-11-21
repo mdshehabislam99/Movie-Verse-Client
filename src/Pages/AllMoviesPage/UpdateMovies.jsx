@@ -110,7 +110,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="title"
                   name="title"
-                  defaultValue={formData.title}
+                  defaultValue={formData?.title}
                   onChange={handleChange}
                   required
                   placeholder="Enter movie title"
@@ -134,7 +134,7 @@ const UpdateMovies = () => {
                 <select
                   id="genre"
                   name="genre"
-                  defaultValue={formData.genre}
+                  defaultValue={formData?.genre}
                   onChange={handleChange}
                   required
                   className="w-full px-9 py-2 text-gray-800 bg-gray-200 border border-gray-400 rounded-full 
@@ -171,7 +171,7 @@ const UpdateMovies = () => {
                   type="number"
                   id="releaseYear"
                   name="releaseYear"
-                  defaultValue={formData.releaseYear}
+                  defaultValue={formData?.releaseYear}
                   onChange={handleChange}
                   required
                   min="1900"
@@ -198,7 +198,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="director"
                   name="director"
-                  defaultValue={formData.director}
+                  defaultValue={formData?.director}
                   onChange={handleChange}
                   required
                   placeholder="Director's name"
@@ -223,7 +223,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="cast"
                   name="cast"
-                  defaultValue={formData.cast}
+                  defaultValue={formData?.cast}
                   onChange={handleChange}
                   required
                   placeholder="Actor 1, Actor 2, Actor 3"
@@ -248,7 +248,7 @@ const UpdateMovies = () => {
                   type="number"
                   id="rating"
                   name="rating"
-                  defaultValue={formData.rating}
+                  defaultValue={formData?.rating}
                   onChange={handleChange}
                   required
                   min="0"
@@ -276,7 +276,7 @@ const UpdateMovies = () => {
                   type="number"
                   id="duration"
                   name="duration"
-                  defaultValue={formData.duration}
+                  defaultValue={formData?.duration}
                   onChange={handleChange}
                   required
                   min="1"
@@ -299,7 +299,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="language"
                   name="language"
-                  value={formData.language}
+                  value={formData?.language}
                   onChange={handleChange}
                   placeholder="English"
                   className="w-full px-9 py-2 text-gray-800 bg-gray-200 border border-gray-400 rounded-full 
@@ -320,7 +320,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="country"
                   name="country"
-                  defaultValue={formData.country}
+                  defaultValue={formData?.country}
                   onChange={handleChange}
                   placeholder="Country of origin"
                   className="w-full px-9 py-2 text-gray-800 bg-gray-200 border border-gray-400 rounded-full 
@@ -346,7 +346,7 @@ const UpdateMovies = () => {
                 type="url"
                 id="posterUrl"
                 name="posterUrl"
-                defaultValue={formData.posterUrl}
+                defaultValue={formData?.posterUrl}
                 onChange={handleChange}
                 required
                 placeholder="https://example.com/poster.jpg"
@@ -370,7 +370,7 @@ const UpdateMovies = () => {
               <textarea
                 id="plotSummary"
                 name="plotSummary"
-                defaultValue={formData.plotSummary}
+                defaultValue={formData?.plotSummary}
                 onChange={handleChange}
                 required
                 rows="5"
@@ -388,7 +388,7 @@ const UpdateMovies = () => {
             >
               <button
                 type="button"
-                onClick={() => navigate(`/single-movie-details/${formData._id}`)}
+                onClick={() => navigate(`/single-movie-details/${formData?._id}`)}
                 className="px-8 py-3 bg-red-600 
                 hover:bg-red-800 text-white rounded-full
                  font-semibold transition-all duration-300

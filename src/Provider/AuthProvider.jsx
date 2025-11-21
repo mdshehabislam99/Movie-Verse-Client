@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

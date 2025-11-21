@@ -96,45 +96,45 @@ const RecentlyAddMovie = () => {
       <div className="relative h-120 flex items-center justify-center">
         {getVisibleCards().map((movieItem, index) => (
           <div
-            key={`${movieItem._id}-${index}`}
+            key={`${movieItem?._id}-${index}`}
             className={`absolute transition-all duration-500 cursor-pointer
               ${
-                movieItem.position === "center"
+                movieItem?.position === "center"
                   ? "left-1/2 transform -translate-x-1/2 scale-100 opacity-100 z-30"
-                  : movieItem.position === "left-1"
+                  : movieItem?.position === "left-1"
                   ? "left-[30%] transform -translate-x-[65%] scale-100 opacity-80 z-25"
-                  : movieItem.position === "left-2"
+                  : movieItem?.position === "left-2"
                   ? "left-[20%] transform -translate-x-[120%] scale-90 opacity-70 z-20"
-                  : movieItem.position === "right-1"
+                  : movieItem?.position === "right-1"
                   ? "left-[70%] transform -translate-x-[35%] scale-100 opacity-80 z-25"
                   : "left-[80%] transform  translate-x-[20%] scale-90 opacity-60 z-15"
               }`}
             onClick={() => {
-              if (movieItem.position.startsWith("left")) {
+              if (movieItem?.position.startsWith("left")) {
                 prevSlide();
-              } else if (movieItem.position.startsWith("right")) {
+              } else if (movieItem?.position.startsWith("right")) {
                 nextSlide();
               }
             }}
           >
-            {movieItem.position === "center" ? (
+            {movieItem?.position === "center" ? (
               <MovieCard movie={movieItem} />
             ) : (
               <div
                 className={`bg-white rounded-2xl shadow-2xl overflow-hidden 
-                ${movieItem.position.includes("1") ? "w-64" : "w-56"} 
+                ${movieItem?.position.includes("1") ? "w-64" : "w-56"} 
                 transition-all duration-500 relative`}
               >
                 <div className="absolute inset-0 bg-black/60 rounded-2xl z-10"></div>
 
                 <div
                   className={`relative ${
-                    movieItem.position.includes("1") ? "h-40" : "h-36"
+                    movieItem?.position.includes("1") ? "h-40" : "h-36"
                   } overflow-hidden`}
                 >
                   <img
-                    src={movieItem.posterUrl}
-                    alt={movieItem.title}
+                    src={movieItem?.posterUrl}
+                    alt={movieItem?.title}
                     className="w-full h-full object-cover"
                   />
                 </div>

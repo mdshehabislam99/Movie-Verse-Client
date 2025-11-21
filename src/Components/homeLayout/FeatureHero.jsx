@@ -124,29 +124,29 @@ const FeatureHero = () => {
       <div className="slider">
         {getVisibleCards().map((movieItem, index) => (
           <div
-            key={`${movieItem._id}-${index}`}
-            className={getCardClasses(movieItem.position)}
+            key={`${movieItem?._id}-${index}`}
+            className={getCardClasses(movieItem?.position)}
             onClick={() => {
-              if (movieItem.position.startsWith("left")) {
+              if (movieItem?.position.startsWith("left")) {
                 prevSlide();
-              } else if (movieItem.position.startsWith("right")) {
+              } else if (movieItem?.position.startsWith("right")) {
                 nextSlide();
               }
             }}
           >
-            {movieItem.position === "center" ? (
+            {movieItem?.position === "center" ? (
               <MovieCard movie={movieItem} />
             ) : (
               <div
                 className={`poster-card ${getPosterSizeClasses(
-                  movieItem.position
+                  movieItem?.position
                 )}`}
               >
                 <div className="poster-overlay"></div>
                 <div className="poster-image">
                   <img
-                    src={movieItem.posterUrl}
-                    alt={movieItem.title}
+                    src={movieItem?.posterUrl}
+                    alt={movieItem?.title}
                     className="w-full h-full object-cover"
                   />
                 </div>

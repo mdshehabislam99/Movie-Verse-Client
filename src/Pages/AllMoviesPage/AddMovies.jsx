@@ -39,6 +39,7 @@ const AddMovies = () => {
       "http://localhost:3000/add-movie",
       movieData
     );
+     alert("Movie Added Successfully!!");
     navigate("/all-movie");
   };
 
@@ -368,7 +369,7 @@ const AddMovies = () => {
             >
               <button
                 type="button"
-                onClick={() => navigate("/movie")}
+                onClick={() => navigate("/")}
                 className="px-8 py-3 bg-red-600 
                 hover:bg-red-800 text-white rounded-full
                  font-semibold transition-all duration-300

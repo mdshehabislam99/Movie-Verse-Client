@@ -127,7 +127,7 @@ const handletoggleTheme = () => {
             Search
           </button>
 
-          {/* Theme Toggle Button */}
+      
           <button
             onClick={handletoggleTheme}
             className="hover:text-amber-300 transition-all
@@ -143,7 +143,7 @@ const handletoggleTheme = () => {
             )}
           </button>
 
-          {/* User Auth Section */}
+         
           {user ? (
             <div className="flex items-center gap-4">
               <Link to="/my-collection">

@@ -29,8 +29,8 @@ const AboutPlatform = () => {
     <div
       className="backdrop-blur-lg p-3"
     >
-      <h3 className="text-lg font-semibold mb-1">{feature.title}</h3>
-      <p >{feature.description}</p>
+      <h3 className="text-lg font-semibold mb-1">{feature?.title}</h3>
+      <p >{feature?.description}</p>
     </div>
   );
 

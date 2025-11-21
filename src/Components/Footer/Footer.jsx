@@ -98,12 +98,12 @@ const Footer = () => {
                    flex-col hover:text-amber-500  transition-all
                   duration-300 transform hover:scale-105"
                 >
-                  <span
-                    className="hover:text-amber-500 w-14 hover:bg-amber-500  ml-2
+                  <SocialIcon
+                    url="https://www.facebook.com/"
+                    className="hover:text-amber-500 w-14  ml-2
                    h-14 bg-blue-800 rounded-full flex items-center justify-center"
-                  >
-                    <SocialIcon url="https://www.facebook.com/"></SocialIcon>
-                  </span>
+                  ></SocialIcon>
+
                   <span className="lg:mt-2"> Facebook</span>
                 </a>
 
@@ -114,12 +114,12 @@ const Footer = () => {
                    flex-col hover:text-amber-500  transition-all
                   duration-300 transform hover:scale-105"
                 >
-                  <span
-                    className="hover:text-amber-500 w-14 hover:bg-amber-500
+                  <SocialIcon
+                    url="https://x.com"
+                    className="hover:text-amber-500 w-14 
                    h-14 bg-blue-800 rounded-full flex items-center justify-center"
-                  >
-                    <SocialIcon url="https://x.com"></SocialIcon>
-                  </span>
+                  ></SocialIcon>
+
                   <span className="lg:mt-2">Twitter</span>
                 </a>
 
@@ -130,12 +130,12 @@ const Footer = () => {
                    flex-col hover:text-amber-500  transition-all
                   duration-300 transform hover:scale-105"
                 >
-                  <span
-                    className="hover:text-amber-500 w-14 hover:bg-amber-500
+                  <SocialIcon
+                    url="https://github.com/shehabislam99"
+                    className="hover:text-amber-500 w-14 
                    h-14 bg-blue-800 rounded-full flex items-center justify-center"
-                  >
-                    <SocialIcon url="https://github.com/shehabislam99"></SocialIcon>
-                  </span>
+                  ></SocialIcon>
+
                   <span className="lg:mt-2"> GitHub</span>
                 </a>
 
@@ -146,12 +146,12 @@ const Footer = () => {
                    flex-col hover:text-amber-500 transition-all
                   duration-300 transform hover:scale-105"
                 >
-                  <span
-                    className="hover:text-amber-500 w-14 hover:bg-amber-500  
+                  <SocialIcon
+                    url="https://www.linkedin.com/"
+                    className="hover:text-amber-500 w-14   
                    h-14 bg-blue-800 rounded-full flex items-center justify-center"
-                  >
-                    <SocialIcon url="https://www.linkedin.com/"></SocialIcon>
-                  </span>
+                  ></SocialIcon>
+
                   <span className="lg:mt-2 "> LinkedIn </span>
                 </a>
               </div>
