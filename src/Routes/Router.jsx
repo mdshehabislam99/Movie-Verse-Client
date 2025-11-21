@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <AddMovies></AddMovies>,
       },
       {
-        path: "/update-movie",
+        path: "/update-movie/:id",
         element: <UpdateMovies></UpdateMovies>,
       },
       {

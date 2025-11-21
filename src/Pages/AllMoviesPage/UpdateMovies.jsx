@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Provider/AuthProvider";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { CgAsterisk } from "react-icons/cg";
+import axios from "axios";
 
 const UpdateMovies = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { id } = useParams();
 
+  const [loding, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     genre: "",
@@ -23,36 +26,43 @@ const UpdateMovies = () => {
     created_at: "",
   });
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/single-movies?id=${id}`)
+      .then((res) => {
+        setFormData(res.data); 
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, [id]);
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log("Submitting with user:", user);
 
     const movieData = {
       ...formData,
       addedBy: user.email || "unknown",
       created_at: new Date().toISOString(),
     };
+    console.log(movieData)
 
-    try {
-      const response = await fetch("http://localhost:3000/movie", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(movieData),
-      });
+   axios.put(
+      `http://localhost:3000/update-movie/${id}`,
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("Movie added successfully:", data);
-      navigate("/all-movie");
-    } catch (error) {
-      console.error("Failed to add movie:", error);
-      alert("Failed to add movie. Please try again.");
-    }
+      movieData
+    )
+    .then(res=>{
+      console.log(res)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  // console.log("Test update successful:", response.data);
+  // alert("Movie updated successfully!");
+  // navigate("/all-movie");
   };
 
   const handleChange = (e) => {
@@ -61,7 +71,6 @@ const UpdateMovies = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
   const genres = [
     "Action",
     "Drama",
@@ -78,13 +87,6 @@ const UpdateMovies = () => {
   return (
     <div className="flex min-h-screen p-20 md:p-25 lg:p-30">
       <div className="w-full">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Edit Your Movies</h1>
-          <p className="text-xl font-semibold text-gray-400 mb-8">
-            Correction and Update your movie here
-          </p>
-        </div>
-
         <div
           className="bg-gradient-to-r  from-pink-300
         to-green-400 backdrop-blur-lg rounded-2xl px-15 py-6 text-black"
@@ -93,9 +95,9 @@ const UpdateMovies = () => {
             className="font-bold 
           text-gray-800 text-3xl text-center mb-4"
           >
-            Update Movie Here
+            Update Your Movie Here
           </h1>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleUpdate} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="">
                 <label
@@ -111,7 +113,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="title"
                   name="title"
-                  value={formData.title}
+                  defaultValue={formData.title}
                   onChange={handleChange}
                   required
                   placeholder="Enter movie title"
@@ -135,7 +137,7 @@ const UpdateMovies = () => {
                 <select
                   id="genre"
                   name="genre"
-                  value={formData.genre}
+                  defaultValue={formData.genre}
                   onChange={handleChange}
                   required
                   className="w-full px-9 py-2 text-gray-800 bg-gray-200 border border-gray-400 rounded-full 
@@ -148,7 +150,7 @@ const UpdateMovies = () => {
                   {genres.map((genre) => (
                     <option
                       key={genre}
-                      value={genre}
+                      defaultValue={genre}
                       className="text-white bg-blue-900"
                     >
                       {genre}
@@ -172,7 +174,7 @@ const UpdateMovies = () => {
                   type="number"
                   id="releaseYear"
                   name="releaseYear"
-                  value={formData.releaseYear}
+                  defaultValue={formData.releaseYear}
                   onChange={handleChange}
                   required
                   min="1900"
@@ -199,7 +201,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="director"
                   name="director"
-                  value={formData.director}
+                  defaultValue={formData.director}
                   onChange={handleChange}
                   required
                   placeholder="Director's name"
@@ -224,7 +226,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="cast"
                   name="cast"
-                  value={formData.cast}
+                  defaultValue={formData.cast}
                   onChange={handleChange}
                   required
                   placeholder="Actor 1, Actor 2, Actor 3"
@@ -249,7 +251,7 @@ const UpdateMovies = () => {
                   type="number"
                   id="rating"
                   name="rating"
-                  value={formData.rating}
+                  defaultValue={formData.rating}
                   onChange={handleChange}
                   required
                   min="0"
@@ -277,7 +279,7 @@ const UpdateMovies = () => {
                   type="number"
                   id="duration"
                   name="duration"
-                  value={formData.duration}
+                  defaultValue={formData.duration}
                   onChange={handleChange}
                   required
                   min="1"
@@ -321,7 +323,7 @@ const UpdateMovies = () => {
                   type="text"
                   id="country"
                   name="country"
-                  value={formData.country}
+                  defaultValue={formData.country}
                   onChange={handleChange}
                   placeholder="Country of origin"
                   className="w-full px-9 py-2 text-gray-800 bg-gray-200 border border-gray-400 rounded-full 
@@ -347,7 +349,7 @@ const UpdateMovies = () => {
                 type="url"
                 id="posterUrl"
                 name="posterUrl"
-                value={formData.posterUrl}
+                defaultValue={formData.posterUrl}
                 onChange={handleChange}
                 required
                 placeholder="https://example.com/poster.jpg"
@@ -371,7 +373,7 @@ const UpdateMovies = () => {
               <textarea
                 id="plotSummary"
                 name="plotSummary"
-                value={formData.plotSummary}
+                defaultValue={formData.plotSummary}
                 onChange={handleChange}
                 required
                 rows="5"
@@ -389,7 +391,7 @@ const UpdateMovies = () => {
             >
               <button
                 type="button"
-                onClick={() => navigate("/all-movie")}
+                onClick={() => navigate(`/single-movie-details/${formData._id}`)}
                 className="px-8 py-3 bg-red-600 
                 hover:bg-red-800 text-white rounded-full
                  font-semibold transition-all duration-300
@@ -414,6 +416,7 @@ const UpdateMovies = () => {
     </div>
   );
 };
+
 
 export default UpdateMovies;
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 import { CgAsterisk } from "react-icons/cg";
+import axios from "axios";
 
 const AddMovies = () => {
   const { user } = useAuth();
@@ -26,33 +27,21 @@ const AddMovies = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting with user:", user);
- 
+
     const movieData = {
       ...formData,
       addedBy: user.email || "unknown",
       created_at: new Date().toISOString(),
     };
 
-    try {
-      const response = await fetch("http://localhost:3000/movie", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", 
-        },
-        body: JSON.stringify(movieData), 
-      });
+   
+    const response = await axios.post(
+      "http://localhost:3000/add-movie",
+      movieData
+    );
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("Movie added successfully:", data);
-      navigate("/all-movie");
-    } catch (error) {
-      console.error("Failed to add movie:", error);
-      alert("Failed to add movie. Please try again.");
-    }
+    console.log("Movie added successfully:", response.data);
+    navigate("/all-movie");
   };
 
   const handleChange = (e) => {
@@ -61,7 +50,6 @@ const AddMovies = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
   const genres = [
     "Action",
     "Drama",
@@ -78,13 +66,6 @@ const AddMovies = () => {
   return (
     <div className="flex min-h-screen p-20 md:p-25 lg:p-30">
       <div className="w-full">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Add Movies</h1>
-          <p className="text-xl font-semibold text-gray-400 mb-8">
-            Share your favorite movie with the Movie Verse
-          </p>
-        </div>
-
         <div
           className="bg-gradient-to-r  from-pink-300
         to-green-400 backdrop-blur-lg rounded-2xl px-15 py-6 text-black"

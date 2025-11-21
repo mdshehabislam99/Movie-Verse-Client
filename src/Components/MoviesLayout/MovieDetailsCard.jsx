@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { FcRating } from "react-icons/fc";
 import {  FaClock, FaGlobe, FaMapMarkerAlt } from "react-icons/fa";
 import { GiFilmProjector } from "react-icons/gi";
 import { IoFilmSharp } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
+import axios from "axios";
 
 const MovieDetailsCard = ({ movie }) => {
+  const[data,setData] =useState([])
+
+const handleDelelte = (id)=>{
+  axios
+    .delete(`http://localhost:3000/delete-movie?id=${id}`)
+    .then((res) => {
+      console.log(res.data);
+      const filteredData = data.filter((d) => d._id != id);
+      setData(filteredData);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+
   if (!movie) {
     return (
       <div className="min-h-screen bg-blue-900 flex items-center justify-center">
@@ -183,7 +200,7 @@ const MovieDetailsCard = ({ movie }) => {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 text-lg font-semibold">
                 <Link
-                  to="/update-movie"
+                to={`/update-movie/${movie?._id}`}
                   className="flex-1 bg-green-500 
                 hover:bg-amber-500  py-4 rounded-full 
                   transition-all duration-300 
@@ -192,15 +209,15 @@ const MovieDetailsCard = ({ movie }) => {
                 >
                   <button>Edit Movie</button>
                 </Link>
-                <Link
-                  to="/delete"
+                <button
+                  onClick={() => handleDelelte(movie._id)}
                   className="flex-1 bg-red-600 
                  hover:bg-red-700   py-4 text-white
                 rounded-full  transition-all duration-300 transform 
                 hover:scale-105  flex items-center justify-center space-x-2"
                 >
-                  <button>Delete</button>
-                </Link>
+                  Delete
+                </button>
               </div>
             </div>
           </div>
