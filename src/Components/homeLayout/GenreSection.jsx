@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import GlobalLoader from "../GlobalLoader/GlobalLoader";
 
 const GenreSection = () => {
   const { moviesId } = useParams();
@@ -60,27 +61,8 @@ const GenreSection = () => {
       .sort((a, b) => b.count - a.count)
       .slice(0, 10);
   };
-
   const genres = getAllGenres();
-
-  const GenreCard = ({ genre }) => (
-    <Link
-      to={`/genre/${genre?.name}`}
-      className={`group relative bg-gradient-to-br ${genre.color} rounded-2xl p-6 text-white overflow-hidden hover:scale-105 transition-all duration-500 hover:shadow-2xl animate-fade-in-up`}
-    >
-      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
-
-      <div className="relative z-10">
-        <h3 className="text-xl font-bold mb-2">{genre?.name}</h3>
-        <p className="text-white/80">
-          {genre?.count} {genre?.count === 1 ? "movie" : "movies"}
-        </p>
-      </div>
-
-      <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/30 rounded-2xl transition-colors duration-300" />
-    </Link>
-  );
-
+ if (loading) return <div></div>;
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">
@@ -89,14 +71,32 @@ const GenreSection = () => {
             <span className="text-green-500">Movie</span>'S By Genre
           </h2>
           <p className="text-xl max-w-2xl mx-auto">
-            Explore {movies?.length} movies across {genres?.length} genres
+            Explore{" "}
+            <span className="font-bold text-blue-600">{movies?.length}</span>{" "}
+            movies across{" "}
+            <span className="font-bold text-green-600"> {genres?.length}</span>{" "}
+            genres
           </p>
         </div>
 
-        {genres.length > 0 ? (
+        {genres?.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {genres.map((genre, index) => (
-              <GenreCard key={genre?.name} genre={genre} />
+            {genres.map((genre) => (
+              <Link
+                to={`/genre/${genre?.name}`}
+                className={`group relative bg-gradient-to-br ${genre.color} rounded-2xl p-6 text-white overflow-hidden hover:scale-105 transition-all duration-500 hover:shadow-2xl animate-fade-in-up`}
+              >
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-2">{genre?.name}</h3>
+                  <p className="text-white/80">
+                    {genre?.count} {genre?.count === 1 ? "movie" : "movies"}
+                  </p>
+                </div>
+
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/30 rounded-2xl transition-colors duration-300" />
+              </Link>
             ))}
           </div>
         ) : (

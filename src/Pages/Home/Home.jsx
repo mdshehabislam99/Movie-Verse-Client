@@ -5,12 +5,14 @@ import FeatureHero from "../../Components/homeLayout/FeatureHero.jsx";
 import RecentlyAddMovie from "../../Components/homeLayout/RecentAddMovie.jsx";
 import GenreSection from "../../Components/homeLayout/GenreSection.jsx";
 import StatSection from "../../Components/homeLayout/StatSection.jsx";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader.jsx";
 
 function Home() {
    
   return (
     <>
       <div>
+        <GlobalLoader></GlobalLoader>
         <div>
           <BannerTopRatedMovies></BannerTopRatedMovies>
         </div>

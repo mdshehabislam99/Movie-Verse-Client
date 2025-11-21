@@ -66,6 +66,7 @@ const Login = () => {
   }
   return (
     <div className="flex min-h-screen px-25">
+      <GlobalLoader></GlobalLoader>
       <div
         className="mt-25 mb-10 py-10  bg-gradient-to-r 
       from-pink-300 to-green-400 flex-1 rounded-lg flex

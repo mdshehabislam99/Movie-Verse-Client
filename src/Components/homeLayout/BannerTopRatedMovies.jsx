@@ -42,13 +42,7 @@ const BannerTopRatedMovies = () => {
     loop: true,
     className: "swiper",
   };
-  if (loading) {
-    return (
-      <div className="relative h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
-      </div>
-    );
-  }
+ if (loading) return <div></div>;
      if (movies.length === 0) {
        return (
          <div className="relative h-screen flex items-center justify-center">
@@ -80,16 +74,21 @@ const BannerTopRatedMovies = () => {
                   <p className="text-lg md:text-xl mb-8 text-gray-100 leading-relaxed">
                     {movieItem?.plotSummary}
                   </p>
-                  <button className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-amber-500/25">
-                    <Link to="/add-movie">Add More Movies</Link>
-                  </button>
+                  <Link
+                    to="/add-movie"
+                    className="bg-amber-500
+                     hover:bg-amber-600 text-white font-bold py-3 px-6 
+                     rounded-full text-lg transition-all duration-300 
+                     transform hover:scale-105 shadow-2xl hover:shadow-amber-500/25"
+                  >
+                    <button>Add More Movies</button>
+                  </Link>
                 </div>
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-
     </div>
   );
 };

@@ -3,6 +3,9 @@ import { useAuth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 import { CgAsterisk } from "react-icons/cg";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { RuleTester } from "eslint";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const AddMovies = () => {
   const { user } = useAuth();
@@ -27,19 +30,19 @@ const AddMovies = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting with user:", user);
-
+   
     const movieData = {
       ...formData,
       addedBy: user.email || "unknown",
       created_at: new Date().toISOString(),
     };
-
+       
    
      axios.post(
       "http://localhost:3000/add-movie",
       movieData
     );
-     alert("Movie Added Successfully!!");
+     toast.success("Movie Added Successfully!!");
     navigate("/all-movie");
   };
 

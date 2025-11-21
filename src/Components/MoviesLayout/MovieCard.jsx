@@ -4,6 +4,7 @@ import { FaPlay } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router";
 import axios from "axios";
 import { useAuth } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const MovieCard = ({ movie }) => {
    axios
      .post("http://localhost:3000/add-to-collection", userload)
      .then((res) => {
-       alert("Movie added to your collection!");
+       toast.success("Movie added to your collection!");
        navigate("/my-collection");
      })
      .catch((err) => {

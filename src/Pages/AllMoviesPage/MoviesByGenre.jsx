@@ -2,6 +2,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MovieCard from "../../Components/MoviesLayout/MovieCard";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const MoviesByGenre = () => {
   const { genreName } = useParams();
@@ -21,9 +22,8 @@ const MoviesByGenre = () => {
       });
   }, [genreName]);
 
-  if (loading) return
-   <p className="text-center py-10">Loading...</p>;
-    
+  if (loading) return(<GlobalLoader></GlobalLoader>)
+  
      if (movies.length === 0) {
        return (
          <div className="relative h-screen flex items-center justify-center">

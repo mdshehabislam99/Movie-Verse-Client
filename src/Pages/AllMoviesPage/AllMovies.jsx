@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import MovieCard from '../../Components/MoviesLayout/MovieCard';
 import axios from 'axios';
+import GlobalLoader from '../../Components/GlobalLoader/GlobalLoader';
 
 const AllMovies = () => {
 
@@ -21,8 +22,7 @@ const AllMovies = () => {
       });
   }, [moviesId]);
   
-  if (loading) return;
-  <p className="text-center py-10">Loading...</p>;
+  if (loading) return(<GlobalLoader></GlobalLoader>);
 
     if (movies.length === 0) {
       return (

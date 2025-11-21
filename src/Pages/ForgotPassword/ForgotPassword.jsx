@@ -5,6 +5,7 @@ import { FaArrowLeft, FaEnvelope} from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useAuth } from "../../Provider/AuthProvider";
 import Logo from "../../Components/Logo/Logo";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -38,7 +39,7 @@ const ForgotPassword = () => {
     <div
       className="min-h-screen 
       flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-    >
+    > <GlobalLoader></GlobalLoader>
       <div className="max-w-md w-full space-y-8">
         <div className="bg-gradient-to-br from-pink-300 to-green-400 p-8 rounded-2xl shadow-xl border border-gray-100">
           <div className="text-center">

@@ -6,7 +6,7 @@ import axios from "axios";
 const MovieDetails = () => {
    const { moviesId } = useParams();
    const [movie, setMovies] = useState([]);
-   const [loding, setLoading] = useState(true);
+   const [loading, setLoading] = useState(true);
 
    useEffect(() => {
      axios

@@ -7,6 +7,7 @@ import { MdDateRange } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const MovieDetailsCard = ({ movie }) => {
    const navigate = useNavigate();
@@ -20,7 +21,7 @@ const handleDelelte = (id) => {
     .delete(`http://localhost:3000/delete-movie?id=${id}`)
     .then((res) => {
       console.log("Deleted:", res.data);
-      alert("Oops..Movie deleted");
+      toast.success("Oops..Movie deleted");
       navigate("/all-movie"); 
     })
     .catch((error) => {

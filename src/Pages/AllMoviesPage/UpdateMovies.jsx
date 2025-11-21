@@ -3,13 +3,15 @@ import { useAuth } from "../../Provider/AuthProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { CgAsterisk } from "react-icons/cg";
 import axios from "axios";
+import toast from "react-hot-toast";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const UpdateMovies = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [loding, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     genre: "",
@@ -53,12 +55,12 @@ const UpdateMovies = () => {
       .put(`http://localhost:3000/update-movie/${id}`, movieData)
       .then((res) => {
         console.log("Update success:", res.data);
-        alert("Movie updated successfully!");
+        toast.success("Movie updated successfully!");
         navigate(`/single-movie-details/${id}`);
       })
       .catch((err) => {
         console.log("Update error:", err);
-        alert("Update failed. Check backend logs!");
+        toast.error("Update failed. Check backend now!");
       });
   };
 

@@ -28,18 +28,28 @@ useEffect(() => {
   fetchStats();
 }, []);
 
- 
+ if(loading) return(
+  <div></div>
+ )
 
   return (
     <section className="my-20">
       <div className="mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl font-bubble md:text-5xl font-bold mb-4">
             Statistics About{" "}
-            <span className="text-green-500 ml-1 hover:scale-110 transition-transform duration-200 font-bubble">
+            <span
+              className="text-green-500 ml-1
+             hover:scale-110 transition-transform duration-200
+              "
+            >
               Movie
             </span>
-            <span className="ml-3 text-blue-500  hover:scale-110 transition-transform duration-200 font-bubble">
+            <span
+              className="ml-3 text-blue-500 
+             hover:scale-110 transition-transform duration-200
+              "
+            >
               VerSe
             </span>{" "}
           </h2>

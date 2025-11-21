@@ -153,6 +153,7 @@ const Register = () => {
 
   return (
     <div className=" min-h-screen flex items-center justify-center py-15  ">
+     <GlobalLoader></GlobalLoader>
       <div className="flex  space-y-8">
         <div className="mt-15 bg-gradient-to-br from-pink-300 to-green-400 p-4 rounded-2xl shadow-lg border border-gray-200">
           {/* Register Form */}

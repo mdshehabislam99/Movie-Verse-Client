@@ -70,13 +70,8 @@ const RecentlyAddMovie = () => {
 
     return cards;
   };
- if (loading) {
-   return (
-     <div className="relative h-screen flex items-center justify-center">
-       <div className="text-white text-xl">Loading...</div>
-     </div>
-   );
- }
+ 
+ if (loading) return <div></div>;
  if (movies.length === 0) {
    return (
      <div className="relative h-screen flex items-center justify-center">

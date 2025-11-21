@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "../MoviesLayout/MovieCard";
 import axios from "axios";
 import { useParams } from "react-router";
+import GlobalLoader from "../GlobalLoader/GlobalLoader";
 
 const FeatureHero = () => {
   const { moviesId } = useParams();
@@ -98,13 +99,7 @@ const FeatureHero = () => {
     return `${widthClass} ${heightClass}`;
   };
 
- if (loading) {
-   return (
-     <div className="relative h-screen flex items-center justify-center">
-       <div className="text-white text-xl">Loading...</div>
-     </div>
-   );
- }
+if (loading) return <div></div>;
  if (movies.length === 0) {
    return (
      <div className="relative h-screen flex items-center justify-center">
