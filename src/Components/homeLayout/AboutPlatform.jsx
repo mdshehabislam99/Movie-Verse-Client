@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
-import Logo from "../Logo/Logo";
+import React from "react";
 
 const AboutPlatform = () => {
   const features = [
     {
-      title: "Comprehensive Library",
+      title: "Various Library",
       description:
         "Access thousands of movies from various genres and eras with detailed information and metadata.",
     },
@@ -12,11 +11,6 @@ const AboutPlatform = () => {
       title: "Personal Collections",
       description:
         "Create and manage your own movie collections with custom categorization and personal ratings.",
-    },
-    {
-      title: "Advanced Filtering",
-      description:
-        "Find exactly what you want with our powerful search and filtering options by genre, year, rating, and more.",
     },
     {
       title: "Cross-Platform",

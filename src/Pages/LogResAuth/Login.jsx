@@ -7,12 +7,13 @@ import { FaEnvelope, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 import loginBg from "../../assets/log.jpg";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const Login = () => {
   const { user, signIn, signInWithGoogle } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const [submitting, setSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
   const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
@@ -38,29 +39,31 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitting(true);
+    setLoading(true);
 
     signIn(loginData.email, loginData.password)
       .then(() => {
         toast.success("Login successful! Welcome back!");
       })
       .then(() => {
-        setSubmitting(false);
+        setLoading(false);
       });
   };
 
   const handleGoogle = () => {
-    setSubmitting(true);
+    setLoading(true);
 
     signInWithGoogle()
       .then(() => {
         toast.success("Logged in with Google!");
       })
       .then(() => {
-        setSubmitting(false);
+        setLoading(false);
       });
   };
-
+  if (loading) {
+    return <GlobalLoader />;
+  }
   return (
     <div className="flex min-h-screen px-25">
       <div
@@ -78,7 +81,6 @@ const Login = () => {
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -109,7 +111,7 @@ const Login = () => {
                 />
               </div>
             </div>
-            {/* Password */}
+
             <div>
               <label
                 htmlFor="password"
@@ -147,7 +149,6 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Options */}
             <div className="flex items-center justify-between">
               <label className="flex items-center space-x-2 text-sm text-gray-600">
                 <input
@@ -167,25 +168,21 @@ const Login = () => {
               </Link>
             </div>
 
-            {/* Login button */}
             <button
               type="submit"
-              disabled={submitting}
               className="w-full bg-amber-500 text-white py-3 
               rounded-full font-semibold hover:bg-amber-700  transition-all
                   duration-300 transform hover:scale-105"
             >
-              {submitting ? "Logging in..." : "Login"}
+              Login
             </button>
 
-            {/* Divider */}
             <div className="flex  justify-center">
               <span className="mx-2 text-gray-700 text-sm">
                 Or continue with
               </span>
             </div>
 
-            {/* Google Login */}
             <button
               type="button"
               onClick={handleGoogle}
@@ -215,7 +212,6 @@ const Login = () => {
               Login with Google
             </button>
 
-            {/* Register link */}
             <p className="text-center text-sm text-gray-600 mt-4">
               Don’t have an account?{" "}
               <button
@@ -223,16 +219,13 @@ const Login = () => {
                 hover:text-amber-500 font-semibold  transition-all
                   duration-500 transform hover:scale-105"
               >
-                <Link to="/register" >
-                  Create account
-                </Link>
+                <Link to="/register">Create account</Link>
               </button>
             </p>
           </form>
         </div>
       </div>
 
-      {/* Right side: Background image */}
       <div
         className="hidden mt-25 mb-10 py-10 rounded-lg lg:flex flex-1 bg-cover bg-center bg-no-repeat"
         style={{

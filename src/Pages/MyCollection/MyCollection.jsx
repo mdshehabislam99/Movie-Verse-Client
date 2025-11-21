@@ -37,7 +37,6 @@ const MyCollection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
 
-  // toast state
   const [toast, setToast] = useState({ msg: "", type: null });
 
   useEffect(() => {
@@ -73,16 +72,10 @@ const MyCollection = () => {
   // actual delete
   const handleDeleteConfirmed = () => {
     const id = deleteTarget;
-    if (!id) {
-      setToast({ msg: "Invalid item", type: "error" });
-      setIsModalOpen(false);
-      return;
-    }
-
+   
     axios
       .delete(`http://localhost:3000/delete-collection?id=${id}`)
       .then((res) => {
-        // remove locally
         setMovies((prev) => prev.filter((m) => m._id !== id));
         setToast({ msg: "Removed from collection", type: "success" });
       })
@@ -135,28 +128,28 @@ if (!movies || movies.length === 0){
         </div>
           <div className="grid gap-10 grid-cols-1 mt-10 sm:grid-cols-2 lg:grid-cols-3">
             {movies.map((movie) => (
-              <div key={movie._id} className="w-full mx-auto max-w-xs">
+              <div key={movie?._id} className="w-full mx-auto max-w-xs">
                 <div className="text-center relative group backdrop-blur-lg rounded-2xl bg-gray-800/70 overflow-hidden shadow-xl transition-transform duration-500 hover:scale-105 h-[450px] flex flex-col">
                   <div className="relative">
                     <img
-                      src={movie.posterUrl}
-                      alt={movie.title}
+                      src={movie?.posterUrl}
+                      alt={movie?.title}
                       className="w-full h-80 object-cover transform group-hover:scale-105 transition duration-500"
                     />
 
                     {/* rating & year badges */}
                     <div className="absolute top-4 right-4 bg-purple-600/20 border border-purple-500/30 px-3 py-1 rounded-full text-white text-sm flex items-center gap-1">
                       <FcRating />
-                      <span className="font-semibold">{movie.rating}</span>
+                      <span className="font-semibold">{movie?.rating}</span>
                     </div>
                     <div className="absolute top-4 left-4 bg-purple-600/20 border border-purple-500/30 px-3 py-1 rounded-full text-white text-sm">
-                      {movie.releaseYear}
+                      {movie?.releaseYear}
                     </div>
 
                     {/* overlay view details */}
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                       <Link
-                        to={`/movies/${movie._id}`}
+                        to={`/movies/${movie?._id}`}
                         className="bg-amber-500 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-semibold"
                       >
                         View Details
@@ -181,20 +174,20 @@ if (!movies || movies.length === 0){
                     {/* duration */}
                     <div className="absolute right-4 bottom-4 bg-purple-600/20 border border-purple-500/30 rounded-full px-2 py-1 text-white flex items-center gap-1">
                       <FaPlay />
-                      <span className="text-sm">{movie.duration} min</span>
+                      <span className="text-sm">{movie?.duration} min</span>
                     </div>
                   </div>
 
                   {/* title */}
                   <div className="mt-3 px-4">
                     <h3 className="text-white text-2xl font-bold line-clamp-2">
-                      {movie.title}
+                      {movie?.title}
                     </h3>
                   </div>
 
                   {/* actions */}
                   <div className="mt-auto p-4 flex gap-3 justify-between">
-                    <Link to={`/update-movie/${movie._id}`}>
+                    <Link to={`/update-movie/${movie?._id}`}>
                       <button
                         className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full font-semibold transition"
                         style={{
@@ -227,7 +220,6 @@ if (!movies || movies.length === 0){
           </div>
       </div>
 
-      {/* Confirmation Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="flex justify-end gap-3">

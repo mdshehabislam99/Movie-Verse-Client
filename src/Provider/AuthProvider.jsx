@@ -27,68 +27,47 @@ const AuthProvider = ({ children }) => {
 
   const createUser = (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password).finally(() => {
-      setLoading(false);
-    });
+    return createUserWithEmailAndPassword(auth, email, password)
   };
 
-  const signIn = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password)
-      .then((result) => {
-        setUser(result.user);
-        return result;
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+ const signIn = (email, password) => {
+   setLoading(true);
+   return signInWithEmailAndPassword(auth, email, password).then((result) => {
+     auth.currentUser.reload().then(() => {
+       setUser(auth.currentUser);
+     });
+     return result;
+   });
+ };
 
   const logout = () => {
     setLoading(true);
     return signOut(auth)
-      .then(() => {
-        setUser(null);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   };
 
-  const updateUserProfile = (profileData) => {
-    if (!auth.currentUser) {
-      throw new Error("No user is currently signed in");
-    }
-
-    return updateProfile(auth.currentUser, {
-      displayName: profileData.displayName,
-      photoURL: profileData.photoURL,
-    }).then(() => {
-      const updatedUser = {
-        ...auth.currentUser,
+  const updateUserProfile = (user, profileData) => {
+      updateProfile(user, {
         displayName: profileData.displayName,
         photoURL: profileData.photoURL,
+      });
+
+      const updatedUser = {
+        ...user,
+        displayName: profileData.displayName,
+        photoURL: profileData.photoURL,
+        phone: profileData.phone,
+        address: profileData.address,
       };
-      setUser(updatedUser);
+
       return updatedUser;
-    });
-  };
+    };
+  
 
   const signInWithGoogle = () => {
-    setLoading(true);
-    return signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        setUser(result.user);
-        return result;
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const resetPassword = (email) => {
-    return sendPasswordResetEmail(auth, email);
-  };
+      setLoading(true);
+      return signInWithPopup(auth, googleProvider);
+    };
+    const resetPassword = (email) => sendPasswordResetEmail(auth, email);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -97,6 +76,8 @@ const AuthProvider = ({ children }) => {
     });
     return () => unsubscribe();
   }, []);
+
+
 
   const value = {
     user,

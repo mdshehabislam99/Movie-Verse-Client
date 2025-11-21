@@ -33,14 +33,16 @@ const ErrorPage = () => {
           <div className="inline gap-7">
             <Link
               to="/"
-              className=" bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 "
+              className=" bg-green-600 text-white py-3 px-6 rounded-full
+               font-semibold hover:bg-amber-500 "
             >
               Go Back to Home
             </Link>
 
             <Link
               to="/all-toys"
-              className="ml-5 bg-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-violet-700"
+              className="ml-5 bg-red-800 text-white 
+              py-3 px-6 rounded-full font-semibold hover:bg-amber-500"
             >
               Browse All Movies
             </Link>
@@ -51,7 +53,7 @@ const ErrorPage = () => {
             Need help?{" "}
             <Link
               to="/terms-services"
-              className="text-green-600 hover:text-blue-500 font-medium"
+              className="text-green-600 hover:text-amber-500 font-medium"
             >
               Terms of Services
             </Link>

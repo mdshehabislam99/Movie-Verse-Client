@@ -7,7 +7,8 @@ import Logo from "../../Components/Logo/Logo";
 import imgs from "../../assets/banner2.jpg"
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BsFillPersonFill, BsFillPersonPlusFill } from "react-icons/bs";
-import { MdAddAPhoto } from "react-icons/md";
+import { MdAddAPhoto, MdError } from "react-icons/md";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const Register = () => {
   const { createUser, updateUserProfile, signInWithGoogle, user } = useAuth();
@@ -22,25 +23,20 @@ const Register = () => {
   const [registerData, setRegisterData] = useState({
     firstName: "",
     lastName: "",
-    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
     photoURL: "",
-    acceptTerms: false,
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setRegisterData({
-      ...registerData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+ const handleChange = (e) => {
+   setRegisterData({
+     ...registerData,
+     [e.target.name]: e.target.value,
+   });
+ };
 
   const passwordValid = (password) => {
     const hasUppercase = /[A-Z]/.test(password);
@@ -58,7 +54,7 @@ const Register = () => {
   };
 
   const validatePhotoURL = (url) => {
-    if (!url) return true; // Make photoURL optional
+    if (!url) return false; 
     try {
       new URL(url);
       return url.match(/\.(jpeg|jpg|gif|png|webp)$/) != null;
@@ -74,27 +70,11 @@ const Register = () => {
     if (
       !registerData.firstName ||
       !registerData.lastName ||
-      !registerData.username ||
       !registerData.email ||
       !registerData.password ||
-      !registerData.confirmPassword
-    ) {
-      toast.error("All required fields must be filled", {
-        position: "top-right",
-        autoClose: 5000,
-      });
-      setLoading(false);
-      return;
-    }
+      !registerData.photoURL
+    ) 
 
-    if (registerData.password !== registerData.confirmPassword) {
-      toast.error("Passwords do not match", {
-        position: "top-right",
-        autoClose: 5000,
-      });
-      setLoading(false);
-      return;
-    }
 
     if (!registerData.acceptTerms) {
       toast.error("Please accept the Terms of Use and Privacy Policy", {
@@ -127,20 +107,16 @@ const Register = () => {
       .then((res) => {
         return updateUserProfile(res.user, {
           displayName: fullName,
-          photoURL: registerData.photoURL || "",
+          photoURL: registerData.photoURL,
         });
       })
       .then(() => {
-        toast.success("Successfully registered!", {
+        toast.success("Successfully registered in website", {
           autoClose: 3000,
         });
         setLoading(false);
-        navigate("/", { replace: true });
       })
-      .catch((error) => {
-        toast.error(error.message);
-        setLoading(false);
-      });
+      
   };
 
   const handleGoogle = () => {
@@ -171,6 +147,9 @@ const Register = () => {
       </span>
     </div>
   );
+    if (loading) {
+      return <GlobalLoader />;
+    }
 
   return (
     <div className=" min-h-screen flex items-center justify-center py-15  ">
@@ -185,9 +164,8 @@ const Register = () => {
                     <Logo />
                   </h2>
                 </Link>
-                <p className="text-xl text-gray-600 font-medium">
-                  <span className="font-bold"> Create your account.</span>{" "}
-                  <br /> It's free and only takes a minute.
+                <p className="text-xl text-gray-600 font-bold">
+                  Create your account.
                 </p>
               </div>
               <div className="space-y-2">
@@ -345,7 +323,7 @@ const Register = () => {
                     htmlFor="photoURL"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    Photo URL (Optional)
+                    Photo URL
                   </label>
                   <div
                     className="relative  transition-all
@@ -363,14 +341,41 @@ const Register = () => {
                       type="url"
                       value={registerData.photoURL}
                       onChange={handleChange}
+                      required
                       className="w-full px-8 py-2 text-gray-800 bg-gray-200 border border-gray-400 rounded-full 
                     focus:outline-none focus:ring-2 focus:ring-green-500
                      focus:border-transparent "
                       placeholder="https://example.com/photo.jpg"
                     />
+                    {registerData.photoURL &&
+                      validatePhotoURL(registerData.photoURL) && (
+                        <div className="mt-2">
+                          <p className="text-sm text-gray-600 mb-1">
+                            Photo Preview:
+                          </p>
+                          <div className="w-20 h-20 border-2 border-green-400 rounded-lg overflow-hidden">
+                            <img
+                              src={registerData.photoURL}
+                              alt="Preview"
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                e.target.style.display = "none";
+                              }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                       {registerData.photoURL &&
+                  !validatePhotoURL(registerData.photoURL) && (
+                    <p className="mt-1 text-xs text-red-500 flex items-center">
+                      <MdError className="text-red-500 mr-1" size={12} />
+                      Please enter a valid image URL
+                    </p>
+                  )}
+              </div>
                   </div>
                 </div>
-              </div>
 
               {/* Password Requirements */}
               {registerData.password && (
@@ -411,7 +416,7 @@ const Register = () => {
 
               {/* Google Sign Up */}
               <button
-                type="button"
+                type="submit"
                 onClick={handleGoogle}
                 disabled={loading}
                 className="mt-4 w-full flex justify-center
