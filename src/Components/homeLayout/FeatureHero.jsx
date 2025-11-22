@@ -11,7 +11,7 @@ const FeatureHero = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/get-all-movies")
+      .get("https://movie-verse-server.vercel.app/get-all-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);
@@ -109,7 +109,7 @@ const FeatureHero = () => {
   return (
     <div className="relative w-full mx-auto text-center py-8">
       <h1 className="font-bubble text-5xl font-bold mb-3">
-        Recently Added <span className="text-green-500">Movie</span>'s
+        All <span className="text-green-500">Movie</span>'s Features Here
       </h1>
       <div className="relative h-120 flex items-center justify-center">
         {getVisibleCards().map((movieItem, index) => (

@@ -30,9 +30,9 @@ const UpdateMovies = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/single-movies?id=${id}`)
+      .get(`https://movie-verse-server.vercel.app/single-movies?id=${id}`)
       .then((res) => {
-        setFormData(res.data); 
+        setFormData(res.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -49,10 +49,13 @@ const UpdateMovies = () => {
       addedBy: user.email || "unknown",
       created_at: new Date().toISOString(),
     };
-    console.log(movieData)
+    console.log(movieData);
 
     axios
-      .put(`http://localhost:3000/update-movie/${id}`, movieData)
+      .put(
+        `https://movie-verse-server.vercel.app/update-movie/${id}`,
+        movieData
+      )
       .then((res) => {
         console.log("Update success:", res.data);
         toast.success("Movie updated successfully!");
@@ -82,9 +85,9 @@ const UpdateMovies = () => {
     "Crime",
     "Adventure",
   ];
-if(loading){
-  return(<GlobalLoader></GlobalLoader>)
-}
+  if (loading) {
+    return <GlobalLoader></GlobalLoader>;
+  }
   return (
     <div className="flex min-h-screen p-20 md:p-25 lg:p-30">
       <div className="w-full">
@@ -392,7 +395,9 @@ if(loading){
             >
               <button
                 type="button"
-                onClick={() => navigate(`/single-movie-details/${formData?._id}`)}
+                onClick={() =>
+                  navigate(`/single-movie-details/${formData?._id}`)
+                }
                 className="px-8 py-3 bg-red-600 
                 hover:bg-red-800 text-white rounded-full
                  font-semibold transition-all duration-300
@@ -418,6 +423,4 @@ if(loading){
   );
 };
 
-
 export default UpdateMovies;
-

@@ -10,10 +10,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../Provider/AuthProvider";
 
-
 const MovieDetailsCard = ({ movie }) => {
   const navigate = useNavigate();
-  const { user } = useAuth(); 
+  const { user } = useAuth();
 
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to delete this movie?")) {
@@ -21,7 +20,7 @@ const MovieDetailsCard = ({ movie }) => {
     }
 
     axios
-      .delete(`http://localhost:3000/delete-movie?id=${id}`)
+      .delete(`https://movie-verse-server.vercel.app/delete-movie?id=${id}`)
       .then((res) => {
         console.log("Deleted:", res.data);
         toast.success("Movie deleted successfully");
@@ -189,7 +188,7 @@ const MovieDetailsCard = ({ movie }) => {
               {!isOwner && user && (
                 <div className="text-center ">
                   <p className="text-yellow-800 font-semibold">
-                     Only Owner edit or delete this movies .
+                    Only Owner edit or delete this movies .
                   </p>
                 </div>
               )}

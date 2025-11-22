@@ -11,7 +11,7 @@ const RecentlyAddMovie = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/recent-movies")
+      .get("https://movie-verse-server.vercel.app/recent-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);
@@ -42,7 +42,6 @@ const RecentlyAddMovie = () => {
     const totalMovies = movies.length;
     const cards = [];
 
-  
     for (let i = -2; i < 0; i++) {
       const index = (currentIndex + i + totalMovies) % totalMovies;
       cards.push({
@@ -58,7 +57,6 @@ const RecentlyAddMovie = () => {
       index: currentIndex,
     });
 
-  
     for (let i = 1; i <= 2; i++) {
       const index = (currentIndex + i) % totalMovies;
       cards.push({

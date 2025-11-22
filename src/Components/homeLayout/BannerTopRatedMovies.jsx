@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom"; 
-import { Swiper, SwiperSlide } from "swiper/react"; 
+import { Link, useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -8,24 +8,23 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import axios from "axios";
 
-
 const BannerTopRatedMovies = () => {
-        const { moviesId } = useParams();
-        const [movies, setMovies] = useState([]);
-        const [loading, setLoading] = useState(true);
+  const { moviesId } = useParams();
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-        useEffect(() => {
-          axios
-            .get("http://localhost:3000/top-rated-movies")
-            .then((res) => {
-              setMovies(res.data);
-              setLoading(false);
-            })
-            .catch((error) => {
-              setLoading(false);
-              console.error("Error fetching movies:", error);
-            });
-        }, [moviesId]);
+  useEffect(() => {
+    axios
+      .get("https://movie-verse-server.vercel.app/top-rated-movies")
+      .then((res) => {
+        setMovies(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error("Error fetching movies:", error);
+      });
+  }, [moviesId]);
 
   const swiperParams = {
     modules: [Autoplay, EffectFade, Navigation, Pagination],
@@ -42,17 +41,16 @@ const BannerTopRatedMovies = () => {
     loop: true,
     className: "swiper",
   };
- if (loading) return <div></div>;
-     if (movies.length === 0) {
-       return (
-         <div className="relative h-screen flex items-center justify-center">
-           <p className="text-amber-500 text-4xl text-center font-semibold">
-             No movies found 
-           </p>
-         </div>
-       );
-     }
-
+  if (loading) return <div></div>;
+  if (movies.length === 0) {
+    return (
+      <div className="relative h-screen flex items-center justify-center">
+        <p className="text-amber-500 text-4xl text-center font-semibold">
+          No movies found
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="relative h-screen">

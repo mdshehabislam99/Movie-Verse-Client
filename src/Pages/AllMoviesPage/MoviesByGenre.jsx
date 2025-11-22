@@ -12,10 +12,10 @@ const MoviesByGenre = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/movies-by-genre/${genreName}`)
+      .get(`https://movie-verse-server.vercel.app/movies-by-genre/${genreName}`)
       .then((res) => {
         setMovies(res.data);
-         toast.success("Movie by Genre Here");
+        toast.success("Movie by Genre Here");
         setLoading(false);
       })
       .catch((err) => {
@@ -25,17 +25,17 @@ const MoviesByGenre = () => {
       });
   }, [genreName]);
 
-  if (loading) return(<GlobalLoader></GlobalLoader>)
-  
-     if (movies.length === 0) {
-       return (
-         <div className="relative h-screen flex items-center justify-center">
-           <p className="text-amber-500 text-4xl text-center font-semibold">
-             No movies found in this genre.
-           </p>
-         </div>
-       );
-     }
+  if (loading) return <GlobalLoader></GlobalLoader>;
+
+  if (movies.length === 0) {
+    return (
+      <div className="relative h-screen flex items-center justify-center">
+        <p className="text-amber-500 text-4xl text-center font-semibold">
+          No movies found in this genre.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <section className=" p-10 text-center mx-auto ">
@@ -59,5 +59,3 @@ const MoviesByGenre = () => {
 };
 
 export default MoviesByGenre;
-
-

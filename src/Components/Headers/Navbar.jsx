@@ -4,19 +4,14 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../Provider/AuthProvider";
 import Logo from "../Logo/Logo";
 import { FaSearch } from "react-icons/fa";
-import {
-  HiOutlineMenuAlt1,
-  HiMoon,
-  HiSun,
-  HiX,
-} from "react-icons/hi";
+import { HiOutlineMenuAlt1, HiMoon, HiSun, HiX } from "react-icons/hi";
 import MenuSideBar from "./MenuSideBar";
-
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false); 
+    const [isProfileOpen, setIsProfileOpen] = useState(false); 
+    const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   const handleLogout = () => {
     logout()
@@ -28,15 +23,15 @@ const Navbar = () => {
       });
   };
 
-const handletoggleTheme = () => {
-  setIsDarkTheme(!isDarkTheme);
-  document
-    .querySelector("html")
-    .setAttribute("data-theme", isDarkTheme? "dark" : "light");
-};
+  const handletoggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+    document
+      .querySelector("html")
+      .setAttribute("data-theme", isDarkTheme ? "dark" : "light");
+  };
 
   const navLinks = [
-    {to: "/", label: "Home" },
+    { to: "/", label: "Home" },
     { to: "/all-movie", label: "All Movies" },
     { to: "/my-collection", label: "My Collection" },
   ];
@@ -50,9 +45,7 @@ const handletoggleTheme = () => {
             className={({ isActive }) =>
               `text-[16px] font-medium hover:text-amber-300  transition-all
                   duration-500 transform hover:scale-105  ${
-                    isActive
-                      ? "text-amber-400 font-medium underline"
-                      : ""
+                    isActive ? "text-amber-400 font-medium underline" : ""
                   }`
             }
           >
@@ -63,21 +56,13 @@ const handletoggleTheme = () => {
     </>
   );
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const closeDropdown = () => {
-    setIsDropdownOpen(false);
-  };
-
   return (
     <>
       <nav className="navbar px-6 md:px-12 justify-between py-3 fixed top-0 left-0 shadow-lg  w-full z-50 transition-all duration-300 bg-transparent">
         <div className="flex items-center">
           <div className="flex items-center">
             <button
-              onClick={toggleDropdown}
+              onClick={() => setIsMenuOpen(true)}
               className="lg:hidden flex gap-2 items-center  transition-all
                   duration-300 transform hover:scale-105
               focus:outline-none mr-4"
@@ -124,7 +109,7 @@ const handletoggleTheme = () => {
             duration-500 transform font-semibold hover:scale-105 hidden md:flex  "
             title="Search"
           >
-            <Link to="/my-watchlist"> Search</Link>
+            Search
           </button>
 
           <button
@@ -143,26 +128,42 @@ const handletoggleTheme = () => {
           </button>
 
           {user ? (
-            <div className="flex items-center gap-4">
-              <Link to="/my-collection">
-                <img
-                  src={user.photoURL || "https://via.placeholder.com/40"}
-                  alt="user"
-                  title={user.displayName || user.email}
-                  className="w-10 h-10 
-                  rounded-full border-2 border-amber-500"
-                />
-              </Link>
+            <div className="relative">
               <button
-                onClick={handleLogout}
-                className="bg-amber-500 border-none 
-                rounded-full text-white hover:bg-amber-600 
-                btn px-6 py-2  transition-all
-                  duration-300 transform hover:scale-105
-                 font-medium "
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="flex items-center"
               >
-                Logout
+                <img
+                  src={user?.photoURL || "https://via.placeholder.com/40"}
+                  alt="user"
+                  className="w-10 h-10 rounded-full border-2 border-amber-500"
+                />
               </button>
+
+              {isProfileOpen && (
+                <div
+                  className="absolute right-0 mt-3 font-semibold w-48 backdrop-blur-xl 
+                  py-3"
+                >
+                  <Link
+                    onClick={() => setIsProfileOpen(false)}
+                    to="/my-watchlist"
+                    className="block px-4 py-2 hover:text-amber-500 hover:underline"
+                  >
+                    My Watchlist
+                  </Link>
+
+                  <button
+                    onClick={() => {setIsProfileOpen(false)
+                    
+                      handleLogout();
+                    }}
+                    className="w-full text-left px-4 py-2 hover:text-amber-500 text-red-700"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <div className="flex gap-2">
@@ -194,8 +195,8 @@ const handletoggleTheme = () => {
 
       <MenuSideBar
         links={navLinks}
-        isOpen={isDropdownOpen}
-        onClose={closeDropdown}
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
       />
     </>
   );

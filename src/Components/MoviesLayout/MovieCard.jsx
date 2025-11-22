@@ -10,30 +10,29 @@ const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
   const { user } = useAuth(); //
 
- const handleAddtoCollection = () => {
-   if (!user) {
-     alert("Please login first");
-     return navigate("/login");
-   }
+  const handleAddtoCollection = () => {
+    if (!user) {
+      alert("Please login first");
+      return navigate("/login");
+    }
 
-   const userload = {
-     ...movie,
-     addedBy: user.email,
-   };
-   delete userload._id; 
-   axios
-     .post("http://localhost:3000/add-to-collection", userload)
-     .then((res) => {
-       toast.success("Movie added to your collection!");
-       navigate("/my-collection");
-       console.log(res)
-     })
-     .catch((err) => {
-       console.log("Add error:", err);
-       toast.error("Failed to add movie.");
-     });
- };
-
+    const userload = {
+      ...movie,
+      addedBy: user.email,
+    };
+    delete userload._id;
+    axios
+      .post("https://movie-verse-server.vercel.app/add-to-collection", userload)
+      .then((res) => {
+        toast.success("Movie added to your collection!");
+        navigate("/my-collection");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("Add error:", err);
+        toast.error("Failed to add movie.");
+      });
+  };
 
   return (
     <div
@@ -74,8 +73,8 @@ const MovieCard = ({ movie }) => {
           ))}
         </div>
 
-        <div className="absolute bg-purple-600/20 text-white border border-purple-500/30 rounded-full px-2 py-1 bottom-4 right-4 flex gap-1 mb-3">
-          <FaPlay className="h-4 w-4 text-purple-400" />
+        <div className="absolute bg-purple-600/20 text-white border border-purple-500/30 rounded-full px-2 py-1 bottom-4 right-4 flex gap-1 ">
+          <FaPlay className="h-4 w-4 mb-1 text-purple-400" />
           <span>{movie?.duration} min</span>
         </div>
       </div>

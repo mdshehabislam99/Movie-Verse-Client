@@ -14,7 +14,9 @@ const MyWatchList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3000/my-movie-watchlist?email=${user.email}`)
+      .get(
+        `https://movie-verse-server.vercel.app/my-movie-watchlist?email=${user.email}`
+      )
       .then((res) => {
         setMovies(Array.isArray(res.data) ? res.data : []);
         setLoading(false);
@@ -27,9 +29,7 @@ const MyWatchList = () => {
   }, [user?.email]);
 
   if (loading) {
-    return (
-      <GlobalLoader></GlobalLoader>
-    );
+    return <GlobalLoader></GlobalLoader>;
   }
 
   if (movies.length === 0) {

@@ -9,7 +9,7 @@ const GenreSection = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/get-all-movies")
+      .get("https://movie-verse-server.vercel.app/get-all-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);
@@ -61,7 +61,7 @@ const GenreSection = () => {
       .slice(0, 10);
   };
   const genres = getAllGenres();
- if (loading) return <div></div>;
+  if (loading) return <div></div>;
   return (
     <section className="py-10">
       <div className="container mx-auto px-4">

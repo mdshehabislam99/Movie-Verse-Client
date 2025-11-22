@@ -5,11 +5,10 @@ import { CgAsterisk } from "react-icons/cg";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-
 const AddMovies = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     title: "",
     genre: "",
@@ -29,27 +28,24 @@ const AddMovies = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting with user:", user);
-   
+
     const movieData = {
       ...formData,
       addedBy: user.email || "unknown",
       created_at: new Date().toISOString(),
     };
-       
-   
-     axios
-       .post("http://localhost:3000/add-movie", movieData)
-       .then((res) => {
-         console.log("Added:", res.data);
+
+    axios
+      .post("https://movie-verse-server.vercel.app/add-movie", movieData)
+      .then((res) => {
+        console.log("Added:", res.data);
         toast.success("Movie Added Successfully!!");
-         navigate("/all-movie");
-       })
-       .catch((error) => {
-         console.log("Added error:", error);
-         toast.error("Failed to Added movie");
-       });
-     
-   
+        navigate("/all-movie");
+      })
+      .catch((error) => {
+        console.log("Added error:", error);
+        toast.error("Failed to Added movie");
+      });
   };
 
   const handleChange = (e) => {

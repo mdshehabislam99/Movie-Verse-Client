@@ -12,25 +12,24 @@ const StatSection = () => {
   });
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchStats = async () => {
-    setLoading(true);
-    axios.get("http://localhost:3000/stats")
-   .then((res) => {
-       setStats(res.data);
-       setLoading(false);
-     })
-     .catch((error) => {
-       setLoading(false);
-       console.error("Error fetching movies:", error);
-     });
-    }
-  fetchStats();
-}, []);
+  useEffect(() => {
+    const fetchStats = async () => {
+      setLoading(true);
+      axios
+        .get("https://movie-verse-server.vercel.app/stats")
+        .then((res) => {
+          setStats(res.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setLoading(false);
+          console.error("Error fetching movies:", error);
+        });
+    };
+    fetchStats();
+  }, []);
 
- if(loading) return(
-  <div></div>
- )
+  if (loading) return <div></div>;
 
   return (
     <section className="my-20">
