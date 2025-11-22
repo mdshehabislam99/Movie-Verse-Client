@@ -13,6 +13,7 @@ import MovieDetails from '../Pages/AllMoviesPage/MovieDetails';
 import MoviesByGenre from '../Pages/AllMoviesPage/MoviesByGenre';
 import UpdateMovies from '../Pages/AllMoviesPage/UpdateMovies';
 import PrivetRoute from '../Components/PrivetRout/PrivetRoute';
+import MyWatchList from '../Pages/My-WatchList/MyWatchList';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "/single-movie-details/:moviesId",
         element: <MovieDetails></MovieDetails>,
+      },
+      {path:"my-watchlist",
+        element:<MyWatchList></MyWatchList>
+
       },
     ],
   },

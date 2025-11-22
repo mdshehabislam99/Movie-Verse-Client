@@ -124,10 +124,9 @@ const handletoggleTheme = () => {
             duration-500 transform font-semibold hover:scale-105 hidden md:flex  "
             title="Search"
           >
-            Search
+            <Link to="/my-watchlist"> Search</Link>
           </button>
 
-      
           <button
             onClick={handletoggleTheme}
             className="hover:text-amber-300 transition-all
@@ -143,7 +142,6 @@ const handletoggleTheme = () => {
             )}
           </button>
 
-         
           {user ? (
             <div className="flex items-center gap-4">
               <Link to="/my-collection">

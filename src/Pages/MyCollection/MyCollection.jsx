@@ -11,10 +11,8 @@ const MyCollection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.email) return;
-
+  
     setLoading(true);
-
     axios
       .get(`http://localhost:3000/get-all-collection?email=${user.email}`)
       .then((res) => {
@@ -29,12 +27,6 @@ const MyCollection = () => {
   }, [user?.email]);
 
   const handleDeleteConfirmed = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this movie? from your collection?"
-    );
-
-    if (!confirmDelete) return;
-
     axios
       .delete(`http://localhost:3000/delete-collection?id=${id}`)
       .then((res) => {
@@ -52,18 +44,22 @@ const MyCollection = () => {
     return <GlobalLoader />;
   }
 
-  if (!movies.length) {
+  if (movies.length === 0) {
     return (
-      <div className="text-center py-20">
-        <p className="text-amber-400 text-2xl font-semibold mb-6">
-          No movie?s in your collection
-        </p>
-        <Link
-          to="/all-movie?"
-          className="inline-block bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition"
-        >
-          Browse Movies
-        </Link>
+      <div className=" min-h-screen  flex items-center justify-center">
+        {" "}
+        <div className="text-center py-20">
+          <p className="text-amber-400 text-2xl font-semibold mb-6">
+            No movie?s in your collection
+          </p>
+          <Link
+            to="/all-movie"
+            className="inline-block bg-green-600 hover:bg-amber-700 text-white 
+            px-6 py-3 rounded-lg font-semibold transition-colors"
+          >
+            Browse Movies
+          </Link>
+        </div>
       </div>
     );
   }
@@ -79,8 +75,8 @@ const MyCollection = () => {
         </h1>
 
         <div
-          className="grid gap-10 grid-cols-1 
-        mt-10 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1
+         md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           {movies.map((movie) => (
             <div
@@ -95,7 +91,6 @@ const MyCollection = () => {
               shadow-xl transition-transform duration-500 
               hover:scale-105 h-[410px] flex flex-col"
               >
-         
                 <div className="relative">
                   <img
                     src={movie?.posterUrl}
