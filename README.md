@@ -1,9 +1,7 @@
 # About MovieVerse
-
 Your ultimate movie management companion. Designed for cinephiles and casual viewers alike, MovieVerSe offers a comprehensive solution for organizing, discovering, and managing your movie collection with style and efficiency.
 
-
-## Key Features
+## Features
 -  Browse movie and add movie in database
 -  Edit and Update your movie in database
 -  Side menubar for Navlink as a responsive design
