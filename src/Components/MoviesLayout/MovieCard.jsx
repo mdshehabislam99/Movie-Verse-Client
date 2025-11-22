@@ -74,7 +74,7 @@ const MovieCard = ({ movie }) => {
         </div>
 
         <div className="absolute bg-purple-600/20 text-white border border-purple-500/30 rounded-full px-2 py-1 bottom-4 right-4 flex gap-1 ">
-          <FaPlay className="h-5 w-5  text-purple-400" />
+          <FaPlay className="h-4 w-4 mt-1 text-purple-400" />
           <span>{movie?.duration} min</span>
         </div>
       </div>

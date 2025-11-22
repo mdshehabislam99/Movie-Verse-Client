@@ -11,7 +11,7 @@ Your ultimate movie management companion. Designed for cinephiles and casual vie
 -  Custom Slide for better experience feature and recently added movie
 -  Create and manage personal movie collections
 -  Advanced filtering by genre
--  Statistic About inside all move like genre,rating and each-one
+-  Statistic About inside all move like genre,rating and each-one movie
 -  Add custom movies with detailed information
 -  Fully responsive design for all devices
 -  Secure authentication with Firebase
