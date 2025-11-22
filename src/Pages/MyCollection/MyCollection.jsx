@@ -39,11 +39,12 @@ const MyCollection = () => {
       .delete(`http://localhost:3000/delete-collection?id=${id}`)
       .then((res) => {
         setMovies((prev) => prev.filter((m) => m._id !== id));
-        toast.success("Movie? removed from your collection!");
+        toast.success("Opps..Movie removed from your collection");
+        console.log(res)
       })
       .catch((error) => {
         console.error("Delete error:", error);
-        toast.error("Failed to remove movie?");
+        toast.error("Failed to remove movie");
       });
   };
 

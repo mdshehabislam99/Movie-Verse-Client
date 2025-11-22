@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import {  useParams } from "react-router-dom";
 import MovieDetailsCard from "../../Components/MoviesLayout/MovieDetailsCard";
 import axios from "axios";
+import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const MovieDetails = () => {
    const { moviesId } = useParams();
    const [movie, setMovies] = useState([]);
-   const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
    useEffect(() => {
      axios
@@ -15,13 +16,13 @@ const MovieDetails = () => {
          setMovies(res.data);
          setLoading(false);
        })
-       .catch((error) => {
+       .catch((err) => {
+         console.log(err);
          setLoading(false);
-         console.log(error);
        });
    }, [moviesId]);
 
-
+if (loading) return <GlobalLoader></GlobalLoader>;
 
   return (
     <div className="min-h-screen p-8">

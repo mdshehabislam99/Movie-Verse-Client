@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MovieCard from "../../Components/MoviesLayout/MovieCard";
 import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
+import toast from "react-hot-toast";
 
 const MoviesByGenre = () => {
   const { genreName } = useParams();
@@ -14,10 +15,12 @@ const MoviesByGenre = () => {
       .get(`http://localhost:3000/movies-by-genre/${genreName}`)
       .then((res) => {
         setMovies(res.data);
+         toast.success("Movie by Genre Here");
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Movie by Genre Not Here");
         setLoading(false);
       });
   }, [genreName]);

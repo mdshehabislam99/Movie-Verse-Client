@@ -4,23 +4,23 @@ import { useParams } from "react-router";
 import axios from "axios";
 
 const RecentlyAddMovie = () => {
- const { moviesId } = useParams();
- const [movies, setMovies] = useState([]);
- const [loading, setLoading] = useState(true);
- const [currentIndex, setCurrentIndex] = useState(0);
+  const { moviesId } = useParams();
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
- useEffect(() => {
-   axios
-     .get("http://localhost:3000/get-all-movies")
-     .then((res) => {
-       setMovies(res.data);
-       setLoading(false);
-     })
-     .catch((error) => {
-       setLoading(false);
-       console.error("Error fetching movies:", error);
-     });
- }, [moviesId]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/recent-movies")
+      .then((res) => {
+        setMovies(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error("Error fetching movies:", error);
+      });
+  }, [moviesId]);
 
   const nextSlide = () => {
     if (movies.length === 0) return;
@@ -42,7 +42,7 @@ const RecentlyAddMovie = () => {
     const totalMovies = movies.length;
     const cards = [];
 
-    // Left cards (2 cards) - SAME AS FEATUREHERO
+  
     for (let i = -2; i < 0; i++) {
       const index = (currentIndex + i + totalMovies) % totalMovies;
       cards.push({
@@ -52,13 +52,13 @@ const RecentlyAddMovie = () => {
       });
     }
 
-    // Center card (active) - SAME AS FEATUREHERO
     cards.push({
       ...movies[currentIndex],
       position: "center",
       index: currentIndex,
     });
 
+  
     for (let i = 1; i <= 2; i++) {
       const index = (currentIndex + i) % totalMovies;
       cards.push({
@@ -70,40 +70,54 @@ const RecentlyAddMovie = () => {
 
     return cards;
   };
- 
- if (loading) return <div></div>;
- if (movies.length === 0) {
-   return (
-     <div className="relative h-screen flex items-center justify-center">
-       <p className="text-amber-500 text-4xl text-center font-semibold">
-         No movies found
-       </p>
-     </div>
-   );
- }
 
+  const getCardClasses = (position) => {
+    const baseClass = "absolute transition-all duration-500 cursor-pointer";
+
+    switch (position) {
+      case "center":
+        return `${baseClass} left-1/2 transform -translate-x-1/2 scale-100 opacity-100 z-30`;
+      case "left-1":
+        return `${baseClass} left-[30%] transform -translate-x-[65%] scale-100 opacity-80 z-25`;
+      case "left-2":
+        return `${baseClass} left-[20%] transform -translate-x-[120%] scale-90 opacity-70 z-20`;
+      case "right-1":
+        return `${baseClass} left-[70%] transform -translate-x-[35%] scale-100 opacity-80 z-25`;
+      case "right-2":
+        return `${baseClass} left-[80%] transform translate-x-[20%] scale-90 opacity-60 z-15`;
+      default:
+        return baseClass;
+    }
+  };
+
+  const getPosterUrlSizeClasses = (position) => {
+    const widthClass = position.includes("1") ? "w-64" : "w-56";
+    const heightClass = position.includes("1") ? "h-40" : "h-36";
+
+    return `${widthClass} ${heightClass}`;
+  };
+
+  if (loading) return <div></div>;
+  if (movies.length === 0) {
+    return (
+      <div className="relative h-screen flex items-center justify-center">
+        <p className="text-amber-500 text-4xl text-center font-semibold">
+          No movies found
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full mx-auto text-center py-8">
       <h1 className="font-bubble text-5xl font-bold mb-3">
-        Recently Added <span className=" text-green-500">Movie</span>'s
+        Recently Added <span className="text-green-500">Movie</span>'s
       </h1>
       <div className="relative h-120 flex items-center justify-center">
         {getVisibleCards().map((movieItem, index) => (
           <div
             key={`${movieItem?._id}-${index}`}
-            className={`absolute transition-all duration-500 cursor-pointer
-              ${
-                movieItem?.position === "center"
-                  ? "left-1/2 transform -translate-x-1/2 scale-100 opacity-100 z-30"
-                  : movieItem?.position === "left-1"
-                  ? "left-[30%] transform -translate-x-[65%] scale-100 opacity-80 z-25"
-                  : movieItem?.position === "left-2"
-                  ? "left-[20%] transform -translate-x-[120%] scale-90 opacity-70 z-20"
-                  : movieItem?.position === "right-1"
-                  ? "left-[70%] transform -translate-x-[35%] scale-100 opacity-80 z-25"
-                  : "left-[80%] transform  translate-x-[20%] scale-90 opacity-60 z-15"
-              }`}
+            className={getCardClasses(movieItem?.position)}
             onClick={() => {
               if (movieItem?.position.startsWith("left")) {
                 prevSlide();
@@ -116,17 +130,12 @@ const RecentlyAddMovie = () => {
               <MovieCard movie={movieItem} />
             ) : (
               <div
-                className={`bg-white rounded-2xl shadow-2xl overflow-hidden 
-                ${movieItem?.position.includes("1") ? "w-64" : "w-56"} 
-                transition-all duration-500 relative`}
+                className={`bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 relative ${getPosterUrlSizeClasses(
+                  movieItem?.position
+                )}`}
               >
                 <div className="absolute inset-0 bg-black/60 rounded-2xl z-10"></div>
-
-                <div
-                  className={`relative ${
-                    movieItem?.position.includes("1") ? "h-40" : "h-36"
-                  } overflow-hidden`}
-                >
+                <div className="relative w-full h-full overflow-hidden">
                   <img
                     src={movieItem?.posterUrl}
                     alt={movieItem?.title}

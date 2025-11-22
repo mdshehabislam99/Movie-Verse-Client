@@ -4,8 +4,7 @@ import { useNavigate } from "react-router";
 import { CgAsterisk } from "react-icons/cg";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { RuleTester } from "eslint";
-import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
+
 
 const AddMovies = () => {
   const { user } = useAuth();
@@ -38,12 +37,19 @@ const AddMovies = () => {
     };
        
    
-     axios.post(
-      "http://localhost:3000/add-movie",
-      movieData
-    );
-     toast.success("Movie Added Successfully!!");
-    navigate("/all-movie");
+     axios
+       .post("http://localhost:3000/add-movie", movieData)
+       .then((res) => {
+         console.log("Added:", res.data);
+        toast.success("Movie Added Successfully!!");
+         navigate("/all-movie");
+       })
+       .catch((error) => {
+         console.log("Added error:", error);
+         toast.error("Failed to Added movie");
+       });
+     
+   
   };
 
   const handleChange = (e) => {

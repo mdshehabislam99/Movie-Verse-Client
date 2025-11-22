@@ -43,7 +43,9 @@ const Login = () => {
 
     signIn(loginData.email, loginData.password)
       .then(() => {
-        toast.success("Login successful! Welcome back!");
+        toast.success("Login successful! Welcome back!", {
+          autoClose: 3000,
+        });
       })
       .then(() => {
         setLoading(false);
@@ -55,7 +57,9 @@ const Login = () => {
 
     signInWithGoogle()
       .then(() => {
-        toast.success("Logged in with Google!");
+        toast.success("Logged in with Google!", {
+          autoClose: 3000,
+        });
       })
       .then(() => {
         setLoading(false);

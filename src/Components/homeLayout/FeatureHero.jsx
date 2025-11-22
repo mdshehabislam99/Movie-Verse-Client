@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "../MoviesLayout/MovieCard";
 import axios from "axios";
 import { useParams } from "react-router";
-import GlobalLoader from "../GlobalLoader/GlobalLoader";
 
 const FeatureHero = () => {
   const { moviesId } = useParams();
@@ -43,7 +42,6 @@ const FeatureHero = () => {
     const totalMovies = movies.length;
     const cards = [];
 
-    // Left cards (2 cards)
     for (let i = -2; i < 0; i++) {
       const index = (currentIndex + i + totalMovies) % totalMovies;
       cards.push({
@@ -53,14 +51,12 @@ const FeatureHero = () => {
       });
     }
 
-    // Center card (active)
     cards.push({
       ...movies[currentIndex],
       position: "center",
       index: currentIndex,
     });
 
-    // Right cards (2 cards)
     for (let i = 1; i <= 2; i++) {
       const index = (currentIndex + i) % totalMovies;
       cards.push({
@@ -74,49 +70,48 @@ const FeatureHero = () => {
   };
 
   const getCardClasses = (position) => {
-    const baseClass = "card";
+    const baseClass = "absolute transition-all duration-500 cursor-pointer";
 
     switch (position) {
       case "center":
-        return `${baseClass} center-lg center-md center-sm`;
+        return `${baseClass} left-1/2 transform -translate-x-1/2 scale-100 opacity-100 z-30`;
       case "left-1":
-        return `${baseClass} left-1-lg left-1-md left-1-sm`;
+        return `${baseClass} left-[30%] transform -translate-x-[65%] scale-100 opacity-80 z-25`;
       case "left-2":
-        return `${baseClass} left-2-lg hidden-md hidden-sm`;
+        return `${baseClass} left-[20%] transform -translate-x-[120%] scale-90 opacity-70 z-20`;
       case "right-1":
-        return `${baseClass} right-1-lg right-1-md right-1-sm`;
+        return `${baseClass} left-[70%] transform -translate-x-[35%] scale-100 opacity-80 z-25`;
       case "right-2":
-        return `${baseClass} right-2-lg hidden-md hidden-sm`;
+        return `${baseClass} left-[80%] transform translate-x-[20%] scale-90 opacity-60 z-15`;
       default:
         return baseClass;
     }
   };
 
-  const getPosterSizeClasses = (position) => {
-    const widthClass = position.includes("1") ? "poster-w64" : "poster-w56";
-    const heightClass = position.includes("1") ? "poster-h40" : "poster-h36";
+  const getPosterUrlSizeClasses = (position) => {
+    const widthClass = position.includes("1") ? "w-64" : "w-56";
+    const heightClass = position.includes("1") ? "h-40" : "h-36";
 
     return `${widthClass} ${heightClass}`;
   };
 
-if (loading) return <div></div>;
- if (movies.length === 0) {
-   return (
-     <div className="relative h-screen flex items-center justify-center">
-       <p className="text-amber-500 text-4xl text-center font-semibold">
-         No movies found
-       </p>
-     </div>
-   );
- }
-
+  if (loading) return <div></div>;
+  if (movies.length === 0) {
+    return (
+      <div className="relative h-screen flex items-center justify-center">
+        <p className="text-amber-500 text-4xl text-center font-semibold">
+          No movies found
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="container">
-      <h1 className="font-bubble title">
-        Featured All <span className="text-green-500 ml-1">Movie</span>'s
+    <div className="relative w-full mx-auto text-center py-8">
+      <h1 className="font-bubble text-5xl font-bold mb-3">
+        Recently Added <span className="text-green-500">Movie</span>'s
       </h1>
-      <div className="slider">
+      <div className="relative h-120 flex items-center justify-center">
         {getVisibleCards().map((movieItem, index) => (
           <div
             key={`${movieItem?._id}-${index}`}
@@ -133,12 +128,12 @@ if (loading) return <div></div>;
               <MovieCard movie={movieItem} />
             ) : (
               <div
-                className={`poster-card ${getPosterSizeClasses(
+                className={`bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 relative ${getPosterUrlSizeClasses(
                   movieItem?.position
                 )}`}
               >
-                <div className="poster-overlay"></div>
-                <div className="poster-image">
+                <div className="absolute inset-0 bg-black/60 rounded-2xl z-10"></div>
+                <div className="relative w-full h-full overflow-hidden">
                   <img
                     src={movieItem?.posterUrl}
                     alt={movieItem?.title}

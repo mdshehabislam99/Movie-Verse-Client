@@ -60,7 +60,7 @@ const UpdateMovies = () => {
       })
       .catch((err) => {
         console.log("Update error:", err);
-        toast.error("Update failed. Check backend now!");
+        toast.error("Failed to Update Movies.");
       });
   };
 
@@ -82,7 +82,9 @@ const UpdateMovies = () => {
     "Crime",
     "Adventure",
   ];
-
+if(loading){
+  return(<GlobalLoader></GlobalLoader>)
+}
   return (
     <div className="flex min-h-screen p-20 md:p-25 lg:p-30">
       <div className="w-full">

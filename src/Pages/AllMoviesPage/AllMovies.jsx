@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData, useParams } from 'react-router';
+import {  useParams } from 'react-router';
 import MovieCard from '../../Components/MoviesLayout/MovieCard';
 import axios from 'axios';
 import GlobalLoader from '../../Components/GlobalLoader/GlobalLoader';

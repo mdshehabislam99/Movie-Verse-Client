@@ -27,7 +27,7 @@ const ForgotPassword = () => {
     setIsSubmitting(true);
 
     resetPassword(email).then(() => {
-      toast.success("Password reset email sent! Check your inbox.");
+      toast.success("Reset Password email sent your inbox.");
       setTimeout(() => {
         window.open("https://mail.google.com", "_blank");
         navigate("/login");

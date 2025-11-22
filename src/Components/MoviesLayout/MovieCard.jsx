@@ -26,10 +26,11 @@ const MovieCard = ({ movie }) => {
      .then((res) => {
        toast.success("Movie added to your collection!");
        navigate("/my-collection");
+       console.log(res)
      })
      .catch((err) => {
        console.log("Add error:", err);
-       alert("Failed to add movie.");
+       toast.error("Failed to add movie.");
      });
  };
 

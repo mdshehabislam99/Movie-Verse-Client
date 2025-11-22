@@ -76,15 +76,6 @@ const Register = () => {
     ) 
 
 
-    if (!registerData.acceptTerms) {
-      toast.error("Please accept the Terms of Use and Privacy Policy", {
-        position: "top-right",
-        autoClose: 5000,
-      });
-      setLoading(false);
-      return;
-    }
-
     if (registerData.photoURL && !validatePhotoURL(registerData.photoURL)) {
       toast.error("Please enter a valid image URL", {
         position: "top-right",

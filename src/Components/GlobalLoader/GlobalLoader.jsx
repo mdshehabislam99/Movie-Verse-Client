@@ -5,7 +5,7 @@ const GlobalLoader = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -19,7 +19,7 @@ const GlobalLoader = () => {
         alt="loading"
         className="rounded-full w-25 h-25 animate-spin"
         style={{
-          animationDuration: "2s",
+          animationDuration: "1s",
           animationIterationCount: "infinite",
         }}
       />

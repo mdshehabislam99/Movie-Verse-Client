@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import GlobalLoader from "../GlobalLoader/GlobalLoader";
 
 const GenreSection = () => {
   const { moviesId } = useParams();

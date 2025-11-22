@@ -74,14 +74,25 @@ const BannerTopRatedMovies = () => {
                   <p className="text-lg md:text-xl mb-8 text-gray-100 leading-relaxed">
                     {movieItem?.plotSummary}
                   </p>
-                  <Link
-                    to="/add-movie"
-                    className="bg-amber-500
+                  <Link to="/add-movie">
+                    <button
+                      className="bg-amber-500
                      hover:bg-amber-600 text-white font-bold py-3 px-6 
                      rounded-full text-lg transition-all duration-300 
                      transform hover:scale-105 shadow-2xl hover:shadow-amber-500/25"
-                  >
-                    <button>Add More Movies</button>
+                    >
+                      Add More Movies
+                    </button>
+                  </Link>
+                  <Link to="/all-movie">
+                    <button
+                      className="bg-green-500
+                     hover:bg-amber-600 text-white font-bold py-3 px-6 ml-3
+                     rounded-full text-lg transition-all duration-300 
+                     transform hover:scale-105 shadow-2xl hover:shadow-amber-500/25"
+                    >
+                      Or Explore Movies
+                    </button>
                   </Link>
                 </div>
               </div>
