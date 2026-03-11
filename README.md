@@ -1,34 +1,113 @@
-# About MovieVerse
-Your ultimate movie management companion. Designed for cinephiles and casual viewers alike, MovieVerSe offers a comprehensive solution for organizing, discovering, and managing your movie collection with style and efficiency.
+# MovieVerse
+A streamlined movie management dashboard that combines Firebase-authenticated UX with a customized Node/Express + MongoDB API for browsing, curating, and contributing a personal film database.
 
-## Features
--  Browse movie and add movie in database
--  Edit and Update your movie in database
--  Side menubar for Navlink as a responsive design
--  Dark/Light theme toggle
--  Profile Dropdown with wathlist and logout interfage
--  Slider for Top rated movie 
--  Custom Slide for better experience feature and recently added movie
--  Create and manage personal movie collections
--  Advanced filtering by genre
--  Statistic About inside all move like genre,rating and each-one movie
--  Add custom movies with detailed information
--  Fully responsive design for all devices
--  Secure authentication with Firebase
--  Real-time CRUD operations and incude every operation toast and alert
--  Watchlist functionality for future viewing
--  User have beautifull and better experience
+---
 
-## Technology Stack
-- **Frontend**: React, Tailwind CSS, Firebase Auth
-- **Backend**: Node.js, Express, MongoDB
--**Json data**:fetch as Axios use MongoDB & Crud Operation
-- **Frontend FrameWork**:  React & React-Dom
-- **UI & Styling**: Html_JSX, Custom-CSS, Tailwind-CSS and daisyui
-- **Notifications alert**: React-hot-toast,alert
-- **UX React**: React icons
-- **Slider**: React swiper and Custom Slider
-- **Animate:**: React aos and custom
-- **Build Tools**: Vite,npm
-- **Authentication**: Firebase
-- **Deployment**: Firebase (Client), Vercel (Server)
+## About the Project
+MovieVerse is a single-page experience built with Vite + React that lets users explore curated movies, build collections, and contribute new entries to the shared catalog. Firebase handles authentication while an Express/MongoDB backend exposes the CRUD endpoints the client consumes through shared Axios instances.
+
+---
+
+## Project Overview
+- **Objectives:** Offer authenticated viewers a polished portal to discover films, manage playlists/watchlists, and contribute new records with metadata and media.
+- **Key metrics:** real-time CRUD with Axios (VIP requests via `useAxios`), role-based UI states (via `useRole`), Firebase auth protection, and responsive layouts.
+- **Visuals:** `src/Components/MoviesLayout` holds card/detail components while `src/Pages` contains the main views (AllMovies, Add/Update forms, detail pages, collection view).
+
+---
+
+## Key Features
+- **Explore & filter:** Browse every movie, filter by genre, and jump into detail views from a responsive grid layout.
+- **Protected contributions:** Authenticated users can add or update movies using shared Axios base URLs plus Firebase-auth headers via the custom hook.
+- **Collections & watchlists:** Save favorites, inspect stats (genre, rating, etc.), and toggle themes with navigation/content components wired to Firebase auth state.
+- **Full CRUD feedback loop:** Toast alerts (react-hot-toast) accompany every server interaction, keeping the UI in sync with backend responses.
+- **Auth playground:** Firebase Email/password and Google sign-in live inside dedicated auth routes, with client-side validation and toast feedback.
+
+---
+
+## Tech Stack
+**Frontend:** Vite · React 19 · Tailwind CSS · DaisyUI · React Router 7  
+**Backend:** Node.js · Express · MongoDB (hosted separately, proxied through `VITE_API_URL`)  
+**Tools:** Axios · Firebase Auth · React Hook Form patterns · React Hot Toast · React Icons · Swiper/AOS · Git · VS Code
+
+---
+
+## Dependencies
+List required dependencies or major libraries:
+
+```json
+{
+  "react": "^19.1.1",
+  "axios": "^1.13.2",
+  "tailwindcss": "^4.1.17",
+  "firebase": "^12.5.0"
+}
+```
+
+---
+
+## Installation & Setup
+1. Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/<your-org>/movie-verse-client
+cd Movie-Verse-Client
+npm install
+```
+
+2. Create a `.env` file with the Vite/Firebase vars the app expects:
+
+```env
+VITE_API_URL=https://movie-verse-server.vercel.app
+VITE_IMGBB_API_KEY=your_imgbb_key
+VITE_apiKey=your_firebase_api_key
+VITE_authDomain=your-project.firebaseapp.com
+VITE_projectId=your-project
+VITE_storageBucket=your-project.appspot.com
+VITE_messagingSenderId=XXX
+VITE_appId=XXX
+```
+
+3. Start the dev server or build for production:
+
+```bash
+npm run dev      # local development
+npm run build    # production bundle (output lands in /dist for Firebase Hosting)
+```
+
+4. (Optional) Deploy the client via Firebase Hosting:
+
+```bash
+firebase deploy
+```
+
+---
+
+## Folder Structure
+
+```plaintext
+Movie-Verse-Client/
+├── public/
+├── src/
+│   ├── Assets/               # static images, banners
+│   ├── Components/           # MovieCard, MovieDetailsCard, layout helpers
+│   ├── Hook/                 # shared Axios hooks, role lookup, Firebase auth hooks
+│   ├── Pages/                # AllMovies, MyCollection, Add/Update pages, Auth views
+│   ├── Provider/             # AuthProvider wiring
+│   └── firebase/             # Firebase initialization helpers
+├── dist/                      # Production output (generated by `npm run build`)
+├── firebase.json
+├── package.json
+└── vite.config.js
+```
+
+---
+
+## License
+Distributed under the MIT License. See `LICENSE.txt` for details.
+
+---
+
+## Contact
+**Live URL:** [Add live site once deployed](https://movies-poka-pro.web.app/)  
+**Email:** shihabkhanahab@gmail.com  
+**Portfolio:** [Your Portfolio](https://mdshehabislam99.netlify.app/)
