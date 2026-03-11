@@ -22,7 +22,7 @@ const MovieCard = ({ movie }) => {
     };
     delete userload._id;
     axios
-      .post("https://movie-verse-server.vercel.app/add-to-collection", userload)
+      .post("http://localhost:5000/add-to-collection", userload)
       .then((res) => {
         toast.success("Movie added to your collection!");
         navigate("/my-collection");

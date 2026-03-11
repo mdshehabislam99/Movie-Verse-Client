@@ -9,7 +9,7 @@ const GenreSection = () => {
 
   useEffect(() => {
     axios
-      .get("https://movie-verse-server.vercel.app/get-all-movies")
+      .get("http://localhost:5000/get-all-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);
@@ -38,8 +38,9 @@ const GenreSection = () => {
 
     movies.forEach((movieItem) => {
       if (movieItem?.genre) {
-        const movieGenres = Array.isArray(movieItem.genre)
-          ? movieItem.genre
+        const movieGenres =
+          Array.isArray(movieItem.genre) ?
+            movieItem.genre
           : movieItem.genre.split(",").map((g) => g.trim());
 
         movieGenres.forEach((genre) => {
@@ -78,7 +79,7 @@ const GenreSection = () => {
           </p>
         </div>
 
-        {genres?.length > 0 ? (
+        {genres?.length > 0 ?
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {genres.map((genre) => (
               <Link
@@ -98,13 +99,12 @@ const GenreSection = () => {
               </Link>
             ))}
           </div>
-        ) : (
-          <div className="text-center py-12">
+        : <div className="text-center py-12">
             <p className="text-amber-500 text-3xl font-semibold">
               No Genre Available
             </p>
           </div>
-        )}
+        }
       </div>
     </section>
   );

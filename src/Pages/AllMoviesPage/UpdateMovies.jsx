@@ -30,7 +30,7 @@ const UpdateMovies = () => {
 
   useEffect(() => {
     axios
-      .get(`https://movie-verse-server.vercel.app/single-movies?id=${id}`)
+      .get(`http://localhost:5000/single-movies?id=${id}`)
       .then((res) => {
         setFormData(res.data);
         setLoading(false);
@@ -52,10 +52,7 @@ const UpdateMovies = () => {
     console.log(movieData);
 
     axios
-      .put(
-        `https://movie-verse-server.vercel.app/update-movie/${id}`,
-        movieData
-      )
+      .put(`http://localhost:5000/update-movie/${id}`, movieData)
       .then((res) => {
         console.log("Update success:", res.data);
         toast.success("Movie updated successfully!");

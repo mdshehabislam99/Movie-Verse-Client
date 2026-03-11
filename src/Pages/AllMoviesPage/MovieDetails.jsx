@@ -11,7 +11,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`https://movie-verse-server.vercel.app/single-movies?id=${moviesId}`)
+      .get(`http://localhost:5000/single-movies?id=${moviesId}`)
       .then((res) => {
         setMovies(res.data);
         setLoading(false);

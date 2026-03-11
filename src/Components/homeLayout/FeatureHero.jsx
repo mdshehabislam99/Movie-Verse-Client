@@ -11,7 +11,7 @@ const FeatureHero = () => {
 
   useEffect(() => {
     axios
-      .get("https://movie-verse-server.vercel.app/get-all-movies")
+      .get("http://localhost:5000/get-all-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);
@@ -25,14 +25,14 @@ const FeatureHero = () => {
   const nextSlide = () => {
     if (movies.length === 0) return;
     setCurrentIndex((prevIndex) =>
-      prevIndex === movies.length - 1 ? 0 : prevIndex + 1
+      prevIndex === movies.length - 1 ? 0 : prevIndex + 1,
     );
   };
 
   const prevSlide = () => {
     if (movies.length === 0) return;
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? movies.length - 1 : prevIndex - 1
+      prevIndex === 0 ? movies.length - 1 : prevIndex - 1,
     );
   };
 
@@ -124,12 +124,11 @@ const FeatureHero = () => {
               }
             }}
           >
-            {movieItem?.position === "center" ? (
+            {movieItem?.position === "center" ?
               <MovieCard movie={movieItem} />
-            ) : (
-              <div
+            : <div
                 className={`bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 relative ${getPosterUrlSizeClasses(
-                  movieItem?.position
+                  movieItem?.position,
                 )}`}
               >
                 <div className="absolute inset-0 bg-black/60 rounded-2xl z-10"></div>
@@ -141,7 +140,7 @@ const FeatureHero = () => {
                   />
                 </div>
               </div>
-            )}
+            }
           </div>
         ))}
       </div>

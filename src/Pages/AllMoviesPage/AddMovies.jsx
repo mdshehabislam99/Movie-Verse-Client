@@ -36,7 +36,7 @@ const AddMovies = () => {
     };
 
     axios
-      .post("https://movie-verse-server.vercel.app/add-movie", movieData)
+      .post("http://localhost:5000/add-movie", movieData)
       .then((res) => {
         console.log("Added:", res.data);
         toast.success("Movie Added Successfully!!");

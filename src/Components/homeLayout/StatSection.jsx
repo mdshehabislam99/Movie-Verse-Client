@@ -16,7 +16,7 @@ const StatSection = () => {
     const fetchStats = async () => {
       setLoading(true);
       axios
-        .get("https://movie-verse-server.vercel.app/stats")
+        .get("http://localhost:5000/stats")
         .then((res) => {
           setStats(res.data);
           setLoading(false);

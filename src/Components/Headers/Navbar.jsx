@@ -58,7 +58,9 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar px-6 md:px-12 justify-between py-3 fixed top-0 left-0 shadow-lg  w-full z-50 transition-all duration-300 bg-transparent">
+      <nav className="navbar px-6 md:px-12 justify-between 
+      py-3 fixed top-0 left-0 shadow-lg 
+       w-full z-50 transition-all duration-300 bg-transparent">
         <div className="flex items-center">
           <div className="flex items-center">
             <button

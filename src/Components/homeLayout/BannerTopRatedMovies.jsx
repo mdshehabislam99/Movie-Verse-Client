@@ -15,7 +15,7 @@ const BannerTopRatedMovies = () => {
 
   useEffect(() => {
     axios
-      .get("https://movie-verse-server.vercel.app/top-rated-movies")
+      .get("http://localhost:5000/top-rated-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);

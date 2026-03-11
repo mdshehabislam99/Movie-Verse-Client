@@ -14,9 +14,7 @@ const MyWatchList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(
-        `https://movie-verse-server.vercel.app/my-movie-watchlist?email=${user.email}`
-      )
+      .get(`http://localhost:5000/my-movie-watchlist?email=${user.email}`)
       .then((res) => {
         setMovies(Array.isArray(res.data) ? res.data : []);
         setLoading(false);

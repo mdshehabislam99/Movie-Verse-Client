@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAm-bf5i3MTV9l3p4k1RUenCLVOr5Evbo4",
-  authDomain: "movies-poka-pro.firebaseapp.com",
-  projectId: "movies-poka-pro",
-  storageBucket: "movies-poka-pro.firebasestorage.app",
-  messagingSenderId: "618961244610",
-  appId: "1:618961244610:web:4805d665601da29f7fc65b",
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

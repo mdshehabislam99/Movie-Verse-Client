@@ -12,7 +12,7 @@ const MoviesByGenre = () => {
 
   useEffect(() => {
     axios
-      .get(`https://movie-verse-server.vercel.app/movies-by-genre/${genreName}`)
+      .get(`http://localhost:5000/movies-by-genre/${genreName}`)
       .then((res) => {
         setMovies(res.data);
         toast.success("Movie by Genre Here");

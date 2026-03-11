@@ -20,7 +20,7 @@ const MovieDetailsCard = ({ movie }) => {
     }
 
     axios
-      .delete(`https://movie-verse-server.vercel.app/delete-movie?id=${id}`)
+      .delete(`http://localhost:5000/delete-movie?id=${id}`)
       .then((res) => {
         console.log("Deleted:", res.data);
         toast.success("Movie deleted successfully");
@@ -84,7 +84,7 @@ const MovieDetailsCard = ({ movie }) => {
                         <span key={index} className="font-semibold text-lg">
                           {genreItem.trim()}
                         </span>
-                      )
+                      ),
                     )}
                   </div>
                   <div className="bg-gradient-to-r from-pink-500 to-purple-600 backdrop-blur-lg rounded-full px-4 py-2 flex items-center space-x-2">
@@ -150,7 +150,7 @@ const MovieDetailsCard = ({ movie }) => {
                       >
                         {actor.trim()}
                       </span>
-                    )
+                    ),
                   )}
                 </div>
               </div>

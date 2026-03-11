@@ -13,9 +13,7 @@ const MyCollection = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(
-        `https://movie-verse-server.vercel.app/get-all-collection?email=${user.email}`
-      )
+      .get(`http://localhost:5000/get-all-collection?email=${user.email}`)
       .then((res) => {
         setMovies(Array.isArray(res.data) ? res.data : []);
         setLoading(false);
@@ -29,9 +27,7 @@ const MyCollection = () => {
 
   const handleDeleteConfirmed = async (id) => {
     axios
-      .delete(
-        `https://movie-verse-server.vercel.app/delete-collection?id=${id}`
-      )
+      .delete(`http://localhost:5000/delete-collection?id=${id}`)
       .then((res) => {
         setMovies((prev) => prev.filter((m) => m._id !== id));
         toast.success("Opps..Movie removed from your collection");
