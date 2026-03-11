@@ -25,7 +25,7 @@ MovieVerse is a single-page experience built with Vite + React that lets users e
 ---
 
 ## Tech Stack
-**Frontend:** Vite · React 19 · Tailwind CSS · DaisyUI · React Router 7  
+**Frontend:** Vite · React · Tailwind CSS · DaisyUI · React Router 7  
 **Backend:** Node.js · Express · MongoDB (hosted separately, proxied through `VITE_API_URL`)  
 **Tools:** Axios · Firebase Auth · React Hook Form patterns · React Hot Toast · React Icons · Swiper/AOS · Git · VS Code
 
@@ -108,6 +108,6 @@ Distributed under the MIT License. See `LICENSE.txt` for details.
 ---
 
 ## Contact
-**Live URL:** [Add live site once deployed](https://movies-poka-pro.web.app/)  
+**Live URL:** [ live site ](https://movies-poka-pro.web.app/)  
 **Email:** shihabkhanahab@gmail.com  
-**Portfolio:** [Your Portfolio](https://mdshehabislam99.netlify.app/)
+**Portfolio:** [Portfolio](https://mdshehabislam99.netlify.app/)
