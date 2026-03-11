@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import MovieCard from "../../Components/MoviesLayout/MovieCard";
-import axios from "axios";
+import { axiosInstance } from "../../Hook/useAxios";
 import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 
 const AllMovies = () => {
@@ -10,15 +10,15 @@ const AllMovies = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/get-all-movies")
+    axiosInstance
+      .get("/get-all-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
+        console.error("Error fetching movies:", error);
       });
   }, [moviesId]);
 

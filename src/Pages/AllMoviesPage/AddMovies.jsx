@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useAuth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router";
 import { CgAsterisk } from "react-icons/cg";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const AddMovies = () => {
   const { user } = useAuth();
@@ -27,7 +27,7 @@ const AddMovies = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting with user:", user);
+   
 
     const movieData = {
       ...formData,
@@ -35,17 +35,15 @@ const AddMovies = () => {
       created_at: new Date().toISOString(),
     };
 
-    axios
-      .post("http://localhost:5000/add-movie", movieData)
-      .then((res) => {
-        console.log("Added:", res.data);
-        toast.success("Movie Added Successfully!!");
-        navigate("/all-movie");
-      })
-      .catch((error) => {
-        console.log("Added error:", error);
-        toast.error("Failed to Added movie");
-      });
+    try {
+      const res = await axiosInstance.post("/add-movie", movieData);
+  
+      toast.success("Movie Added Successfully!!", res);
+      navigate("/all-movie");
+    } catch (error) {
+  
+      toast.error("Failed to Added movie", error);
+    }
   };
 
   const handleChange = (e) => {

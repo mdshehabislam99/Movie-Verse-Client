@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../Provider/AuthProvider";
 import { useNavigate, useParams } from "react-router-dom";
 import { CgAsterisk } from "react-icons/cg";
-import axios from "axios";
 import toast from "react-hot-toast";
 import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const UpdateMovies = () => {
   const { user } = useAuth();
@@ -29,14 +29,15 @@ const UpdateMovies = () => {
   });
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/single-movies?id=${id}`)
+    axiosInstance
+      .get(`/single-movies?id=${id}`)
       .then((res) => {
         setFormData(res.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.error("Error fetching movie data:", error);
+        toast.error("Failed to load movie data");
         setLoading(false);
       });
   }, [id]);
@@ -49,17 +50,17 @@ const UpdateMovies = () => {
       addedBy: user.email || "unknown",
       created_at: new Date().toISOString(),
     };
-    console.log(movieData);
+  
 
-    axios
-      .put(`http://localhost:5000/update-movie/${id}`, movieData)
+    axiosInstance
+      .put(`/update-movie/${id}`, movieData)
       .then((res) => {
-        console.log("Update success:", res.data);
-        toast.success("Movie updated successfully!");
+      
+        toast.success("Movie updated successfully!", res);
         navigate(`/single-movie-details/${id}`);
       })
       .catch((err) => {
-        console.log("Update error:", err);
+        console.error("Update error:", err);
         toast.error("Failed to Update Movies.");
       });
   };

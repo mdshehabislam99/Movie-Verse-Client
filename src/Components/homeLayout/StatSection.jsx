@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { FcRating } from "react-icons/fc";
 import { IoFilmSharp } from "react-icons/io5";
 import { PiFilmSlateBold } from "react-icons/pi";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const StatSection = () => {
   const [stats, setStats] = useState({
@@ -15,8 +15,8 @@ const StatSection = () => {
   useEffect(() => {
     const fetchStats = async () => {
       setLoading(true);
-      axios
-        .get("http://localhost:5000/stats")
+      axiosInstance
+        .get("/stats")
         .then((res) => {
           setStats(res.data);
           setLoading(false);

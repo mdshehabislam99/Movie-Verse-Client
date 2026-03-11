@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "../MoviesLayout/MovieCard";
 import { useParams } from "react-router";
-import axios from "axios";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const RecentlyAddMovie = () => {
   const { moviesId } = useParams();
@@ -10,8 +10,8 @@ const RecentlyAddMovie = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/recent-movies")
+    axiosInstance
+      .get("/recent-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);

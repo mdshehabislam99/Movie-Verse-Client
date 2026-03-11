@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import MovieCard from "../../Components/MoviesLayout/MovieCard";
 import toast from "react-hot-toast";
 import { useAuth } from "../../Provider/AuthProvider";
 import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const MyWatchList = () => {
   const [movies, setMovies] = useState([]);
@@ -13,8 +13,8 @@ const MyWatchList = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`http://localhost:5000/my-movie-watchlist?email=${user.email}`)
+    axiosInstance
+      .get(`/my-movie-watchlist?email=${user.email}`)
       .then((res) => {
         setMovies(Array.isArray(res.data) ? res.data : []);
         setLoading(false);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MovieDetailsCard from "../../Components/MoviesLayout/MovieDetailsCard";
-import axios from "axios";
 import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const MovieDetails = () => {
   const { moviesId } = useParams();
@@ -10,14 +10,14 @@ const MovieDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/single-movies?id=${moviesId}`)
+    axiosInstance
+      .get(`/single-movies?id=${moviesId}`)
       .then((res) => {
         setMovies(res.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error fetching movie details:", err);
         setLoading(false);
       });
   }, [moviesId]);

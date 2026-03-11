@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import axios from "axios";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const BannerTopRatedMovies = () => {
   const { moviesId } = useParams();
@@ -14,8 +14,8 @@ const BannerTopRatedMovies = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/top-rated-movies")
+    axiosInstance
+      .get("/top-rated-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Provider/AuthProvider";
 import GlobalLoader from "../../Components/GlobalLoader/GlobalLoader";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const MyCollection = () => {
   const { user } = useAuth();
@@ -12,8 +12,8 @@ const MyCollection = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`http://localhost:5000/get-all-collection?email=${user.email}`)
+    axiosInstance
+      .get(`/get-all-collection?email=${user.email}`)
       .then((res) => {
         setMovies(Array.isArray(res.data) ? res.data : []);
         setLoading(false);
@@ -26,12 +26,12 @@ const MyCollection = () => {
   }, [user?.email]);
 
   const handleDeleteConfirmed = async (id) => {
-    axios
-      .delete(`http://localhost:5000/delete-collection?id=${id}`)
+    axiosInstance
+      .delete(`/delete-collection?id=${id}`)
       .then((res) => {
         setMovies((prev) => prev.filter((m) => m._id !== id));
-        toast.success("Opps..Movie removed from your collection");
-        console.log(res);
+        toast.success("Opps..Movie removed from your collection", res);
+      
       })
       .catch((error) => {
         console.error("Delete error:", error);

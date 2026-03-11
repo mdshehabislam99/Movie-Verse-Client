@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const GenreSection = () => {
   const { moviesId } = useParams();
@@ -8,8 +8,8 @@ const GenreSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/get-all-movies")
+    axiosInstance
+      .get("/get-all-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "../MoviesLayout/MovieCard";
-import axios from "axios";
 import { useParams } from "react-router";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const FeatureHero = () => {
   const { moviesId } = useParams();
@@ -10,8 +10,8 @@ const FeatureHero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/get-all-movies")
+    axiosInstance
+      .get("/get-all-movies")
       .then((res) => {
         setMovies(res.data);
         setLoading(false);

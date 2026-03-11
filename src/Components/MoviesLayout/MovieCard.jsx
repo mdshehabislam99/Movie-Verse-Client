@@ -2,9 +2,9 @@ import React from "react";
 import { FcRating } from "react-icons/fc";
 import { FaPlay } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router";
-import axios from "axios";
 import { useAuth } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const MovieCard = ({ movie }) => {
   const navigate = useNavigate();
@@ -21,16 +21,16 @@ const MovieCard = ({ movie }) => {
       addedBy: user.email,
     };
     delete userload._id;
-    axios
-      .post("http://localhost:5000/add-to-collection", userload)
+    axiosInstance
+      .post("/add-to-collection", userload)
       .then((res) => {
-        toast.success("Movie added to your collection!");
+        toast.success("Movie added to your collection!",res);
         navigate("/my-collection");
-        console.log(res);
+       
       })
       .catch((err) => {
-        console.log("Add error:", err);
-        toast.error("Failed to add movie.");
+     
+        toast.error("Failed to add movie.",err);
       });
   };
 

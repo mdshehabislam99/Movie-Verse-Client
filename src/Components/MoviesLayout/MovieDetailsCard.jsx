@@ -6,9 +6,9 @@ import { IoFilmSharp } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../Provider/AuthProvider";
+import { axiosInstance } from "../../Hook/useAxios";
 
 const MovieDetailsCard = ({ movie }) => {
   const navigate = useNavigate();
@@ -19,16 +19,16 @@ const MovieDetailsCard = ({ movie }) => {
       return;
     }
 
-    axios
-      .delete(`http://localhost:5000/delete-movie?id=${id}`)
+    axiosInstance
+      .delete(`/delete-movie?id=${id}`)
       .then((res) => {
-        console.log("Deleted:", res.data);
-        toast.success("Movie deleted successfully");
+   
+        toast.success("Movie deleted successfully", res);
         navigate("/all-movie");
       })
       .catch((error) => {
-        console.log("Delete error:", error);
-        toast.error("Failed to delete movie");
+    
+        toast.error("Failed to delete movie", error);
       });
   };
 
